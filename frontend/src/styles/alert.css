@@ -7,10 +7,9 @@
     margin-bottom: 1rem;
     color: rgba(221, 227, 231, 0.812);
 }
-.alert.--success {
+.alert.alert--success {
     background-color: #28a745;
 }
-
-.alert.--error {
+.alert.alert--error {
     background-color: #dc3545;
 }
