@@ -71,12 +71,35 @@ class AddLike(APIView):
             queryset.likes.remove(request.user)
         serializer = PostSerializer(queryset, many=True)
         return Response(serializer.data)
-# AddDislike
-# AddCommentLike
-# AddCommentDislike
-# CommentReplyView
-# PostDeleteView
-# CommentDeleteView
+
+class AddDislike(APIView):
+    permission_classes = (permissions.AllowAny, )
+    serializer_class = PostSerializer
+    def post(self, request, pk, *args, **kwargs):
+        queryset = Post.object.get(pk=pk)
+        is_like = False
+        for like in queryset.likes.all():
+            if like == request.user:
+                is_like = True
+                break
+        if is_like:
+            queryset.likes.remove(request.user)
+        
+        is_dislike = False
+        for dislike in queryset.dislikes.all():
+            if dislike == request.user:
+                is_dislike = True
+                break
+        if not is_dislike:
+            queryset.dislikes.add(request.user)
+        if is_dislike:
+            queryset.dislikes.remove(request.user)
+        serializer = PostSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+# class AddCommentLike(APIView):
+# class AddCommentDislike(APIView):
+
 # ProfileView
 # ProfileEditView
 # AddFollower
