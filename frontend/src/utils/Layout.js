@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react'
-import Navbar from './Navbar'
-// import { load_current } from '../../store/actions/auth'
+import Navbar from '../components/base/Navbar'
+import { load_current } from '../store/actions/auth'
 import { connect } from 'react-redux'
 
-const Layout = ({children}) => {
+const Layout = ({children, load_current}) => {
     
-    // useEffect(() => {
-    //     load_current(null)
-    // }, [])
+    useEffect(() => {
+        load_current(null)
+    }, [])
   
     return(
         <div>
@@ -16,4 +16,4 @@ const Layout = ({children}) => {
         </div>
     )
 }
-export default connect(null, {})(Layout)
+export default connect(null, {load_current})(Layout)
