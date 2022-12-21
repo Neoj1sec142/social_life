@@ -3,7 +3,7 @@ from .models import Post, Comment, UserProfile, ThreadModel, Message
 from users.models import User
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.HiddenField(
+    author = serializers.PrimaryKeyRelatedField(
         default=serializers.CurrentUserDefault()
     )
     class Meta:
