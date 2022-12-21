@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Post, Comment, UserProfile, ThreadModel, Message
-from django.contrib.auth.models import User
+from users.models import User
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(

@@ -11,7 +11,7 @@ import {
 import { GetUsers } from '../services/UserServices'
 
 
-export const login = (username, password) => async dispatch => {
+export const login = ({username, password}) => async dispatch => {
     try{
         const res = await Client.post('token/obtain/', {
             username: username,
@@ -91,13 +91,13 @@ export const signup = ({first_name, last_name, email, username, password}) => as
         }
     }
     const body = JSON.stringify({
-        "first_name":first_name, 
-        "last_name":last_name, 
-        "email":email,
-        "username":username,
-        "password": password})
+        first_name, 
+        last_name, 
+        email,
+        username,
+        password})
     try{
-        const res = await axios.post('http://localhost:8000/accounts/signup', body, config)
+        const res = await axios.post('http://localhost:8000/users/create/', body, config)
         // if(res.status == 200){}else{}
         dispatch({
             type: SIGNUP_SUCCESS,

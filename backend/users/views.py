@@ -1,8 +1,9 @@
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
+# from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from django.contrib.auth.models import User
+from .models import User
 from .serializers import UserSerializer, UserDetailSerializer#, UserAllDetailsSerializer
 
 class UserList(generics.ListCreateAPIView):
@@ -47,15 +48,3 @@ class UserLogout(APIView):
         token = RefreshToken(refresh_token)
         token.blacklist()
         return Response(status=status.HTTP_205_RESET_CONTENT)
-
-
-
-# class UserAllDetailsList(generics.ListCreateAPIView):
-#   queryset = User.objects.all()
-#   serializer_class = UserAllDetailsSerializer
-  
-
-# class UserAllDetailsDetail(generics.RetrieveUpdateDestroyAPIView):
-#   queryset = User.objects.all()
-#   serializer_class = UserAllDetailsSerializer
-#   lookup_field = 'username'
