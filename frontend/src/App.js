@@ -1,26 +1,29 @@
-import Layout from './utils/Layout';
+import React from 'react'
 import { Route, Routes } from 'react-router-dom';
+import Layout from './utils/Layout';
+import AuthPage from './containers/AuthPage'
+// import Dashboard from './containers/Dashboard';
 import './styles/App.css';
-import Home from './containers/Home'
-import Login from './containers/Login'
-import Register from './containers/Register'
-import Dashboard from './containers/Dashboard'
-import Profile from './containers/Profile'
-import Notfound from './components/notfound'
 
 const App = () => {
   return (
-    <div className='app'>
+    <div className="App">
       <Layout>
-          <Routes>
-            <Route path='/' element={<Home />}/>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/register' element={<Register/>}/>
-            <Route path='/dashboard' element={<Dashboard/>}/>
-            <Route path='/profile' element={<Profile/>}/>
-            <Route path='*' element={<Notfound/>}/>
-          </Routes>
-      </Layout> 
+       
+        <Routes>
+          {/* Main Base Routes */}
+          <Route path='/' element={<AuthPage />}/>
+          {/* <Route path='/main' element={<Dashboard />}/> */}
+          {/* <Route path='/register' element={ <Register /> } />
+          <Route path='/login' element={ <Login /> } />
+          <Route path='/logout' element={ <Logout /> } /> */}
+          {/* User Routes */}
+          
+          
+          
+        </Routes>
+        
+      </Layout>
     </div>
   );
 }

@@ -1,25 +1,19 @@
-import React, { Fragment, useEffect } from 'react'
-import Navbar from '../components/Navbar'
+import React, {useEffect} from 'react'
+import Navbar from './Navbar'
+// import { load_current } from '../../store/actions/auth'
 import { connect } from 'react-redux'
-import { checkAuthenticated } from '../store/actions/auth'
-import {load_user} from '../store/actions/profile'
 
-const Layout = ({ children, checkAuthenticated }) => {
+const Layout = ({children}) => {
     
-    useEffect(() => {
-        checkAuthenticated()
-    },[])
-    
+    // useEffect(() => {
+    //     load_current(null)
+    // }, [])
+  
     return(
-        <Fragment>
+        <div>
             <Navbar />
             {children}
-        </Fragment>
+        </div>
     )
 }
-
-// const mapStateToProps = state => ({
-//     isAuthenticated: state.auth.isAuthenticated
-// })
-
-export default connect(null, {checkAuthenticated, load_user})(Layout)
+export default connect(null, {})(Layout)
