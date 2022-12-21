@@ -84,13 +84,18 @@ export const load_current = (username) => async dispatch => {
 }
 
 
-export const signup = (name, email, password, password2) => async dispatch => {
+export const signup = ({first_name, last_name, email, username, password}) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     }
-    const body = JSON.stringify({name, email, password, password2})
+    const body = JSON.stringify({
+        "first_name":first_name, 
+        "last_name":last_name, 
+        "email":email,
+        "username":username,
+        "password": password})
     try{
         const res = await axios.post('http://localhost:8000/accounts/signup', body, config)
         // if(res.status == 200){}else{}
