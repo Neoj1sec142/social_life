@@ -9,7 +9,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
-        read_only_fields = ('author', 'comments')
+        read_only_fields = ('comments',)
         ordering = ('-date_created')
         
 class CommentSerializer(serializers.ModelSerializer):
