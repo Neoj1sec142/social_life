@@ -104,7 +104,15 @@ class AddDislike(APIView):
 # ProfileEditView
 # AddFollower
 # RemoveFollower
-# ListFollowers
+class ListFollowers(APIView):
+    def get(self, request, pk, *args, **kwargs):
+        profile = UserProfile.objects.get(pk=pk)
+        followers = profile.followers.all()
+        context = {
+            'profile':profile,
+            'followers':followers,
+        }
+        return Response(request, context)
 # UserSearch
 # PostNotification
 # FollowNotification
