@@ -23,7 +23,7 @@ const Login = ({login, setPage, isAuthenticated}) => {
     login(formData)
     setSubitted(true)
   }
-  useEffect(() => {if(isAuthenticated)navigate('/')}, [])
+  useEffect(() => {if(submitted)navigate('/dashboard')}, [submitted])
 
   return (
     <div className={`${con}`}>

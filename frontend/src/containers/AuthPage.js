@@ -9,9 +9,7 @@ const AuthPage = ({isAuthenticated}) => {
   const navigate = useNavigate()
   const {con, flexCtr, row} = classSheet;
   const [page, setPage] = useState(null)
-  useEffect(() => {
-    if(isAuthenticated) navigate('/')
-  },[isAuthenticated])
+  useEffect(() => {if(isAuthenticated) navigate('/dashboard')},[])
 
   return (
     <div className={`${con}`}>

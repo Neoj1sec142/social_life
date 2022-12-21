@@ -3,14 +3,13 @@ from .models import Post, Comment, UserProfile, ThreadModel, Message
 from users.models import User
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all(),
-        source='user'
+    author = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
     )
     class Meta:
         model = Post
         fields = '__all__'
-        read_only_fields = ('user', 'comments')
+        read_only_fields = ('author', 'comments')
         ordering = ('-date_created')
         
 class CommentSerializer(serializers.ModelSerializer):

@@ -1,10 +1,13 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import { Route, Routes } from 'react-router-dom';
-import { connect } from 'react-redux';
 import Layout from './utils/Layout';
 import AuthPage from './containers/AuthPage'
 import Dashboard from './containers/Dashboard';
 import './styles/App.css';
+import Logout from './components/base/Logout';
+import FeedPage from './containers/FeedPage';
+
 
 const App = ({isAuthenticated}) => {
   return (
@@ -12,21 +15,17 @@ const App = ({isAuthenticated}) => {
       <Layout>
         <Routes>
           {/* Main Base Routes */}
-          <Route path='/' element={isAuthenticated ? <Dashboard /> : <AuthPage />}/>
-          <Route path='/dash' element={<Dashboard />}/>
-          {/* <Route path='/register' element={ <Register /> } />
-          <Route path='/login' element={ <Login /> } />
-          <Route path='/logout' element={ <Logout /> } /> */}
-          {/* User Routes */}
-          
-          
-          
+          <Route path='/' element={<AuthPage />}/>
+          <Route path='/logout' element={<Logout />}/>
+          {/* Protected Routes */}
+          <Route path='/dashboard' element={isAuthenticated ? <Dashboard /> : <AuthPage />} />
+          <Route path='/feed' element={isAuthenticated ? <FeedPage /> : <AuthPage />}/> 
         </Routes>
-        
       </Layout>
     </div>
   );
 }
+
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 })

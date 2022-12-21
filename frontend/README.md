@@ -1,4 +1,8 @@
-
+- dashboard only side bar
+- likes and dislikes
+- followers
+- authenticated properly
+- secure frontend bcrypt options ?
 
 
 

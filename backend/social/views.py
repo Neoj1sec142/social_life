@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from rest_framework.mixins import CreateModelMixin
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Post, Comment, UserProfile, ThreadModel, Message
@@ -8,6 +9,8 @@ class PostListView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (permissions.AllowAny,)
+    
+        
     class Meta:
         model = Post
         fields = ('__all__')
@@ -102,6 +105,22 @@ class AddDislike(APIView):
 
 # ProfileView
 # ProfileEditView
+class UserProfileList(generics.ListCreateAPIView):
+    serializer_class = UserProfileSerializer
+    model = serializer_class.Meta.model
+    
+    class Meta:
+        model = UserProfile
+        fields = ('__all__')
+        lookup_field = 'pk'
+        ordering = ('-date_created')
+
+
+class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+    # queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    model = serializer_class.Meta.model
+    permission_classes = (permissions.AllowAny,)
 # AddFollower
 # RemoveFollower
 class ListFollowers(APIView):
