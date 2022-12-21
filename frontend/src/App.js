@@ -4,10 +4,10 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './utils/Layout';
 import AuthPage from './containers/AuthPage'
 import Dashboard from './containers/Dashboard';
-import './styles/App.css';
 import Logout from './components/base/Logout';
 import FeedPage from './containers/FeedPage';
-
+import PostDetail from './containers/details/PostDetail';
+import './styles/App.css';
 
 const App = ({isAuthenticated}) => {
   return (
@@ -20,6 +20,7 @@ const App = ({isAuthenticated}) => {
           {/* Protected Routes */}
           <Route path='/dashboard' element={isAuthenticated ? <Dashboard /> : <AuthPage />} />
           <Route path='/feed' element={isAuthenticated ? <FeedPage /> : <AuthPage />}/> 
+          <Route path='/post/:id' element={isAuthenticated ? <PostDetail /> : <AuthPage />}/> 
         </Routes>
       </Layout>
     </div>

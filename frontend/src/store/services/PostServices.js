@@ -3,14 +3,14 @@ import Client from "./api";
 export const GetPosts = async () => {
     try{
         const res = await Client.get('social/posts/')
-        console.log(res, "BLOG RES")
+        console.log(res, "POST RES")
         return res
     }catch(err){console.log(err)}
 }
 
 export const GetPostById = async (id) => {
     try{
-        const res = await Client.get(`blog/posts/${id}/`)
+        const res = await Client.get(`social/posts/${id}/`)
         return res
     }catch(err){console.log(err)}
 }
@@ -56,7 +56,7 @@ export const AddLike = async (post_id) => {
     
     try{
         const res = await Client.put(`social/posts/${post_id}/like/`)
-        console.log(res, "UPDATE RES")
+        console.log(res, "LIKE RES")
         return res
     } catch (err) {console.log(err)}
 }
@@ -64,7 +64,7 @@ export const AddDislike = async (post_id) => {
     
     try{
         const res = await Client.put(`social/posts/${post_id}/dislike/`)
-        console.log(res, "UPDATE RES")
+        console.log(res, "DISlIKE RES")
         return res
     } catch (err) {console.log(err)}
 }

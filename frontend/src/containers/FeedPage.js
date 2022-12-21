@@ -18,11 +18,12 @@ const FeedPage = ({posts, get_posts}) => {
               </div>
             </div>
           ): <PostForm setSubitted={setSubmitted} />}
-          <div className={`${flexCtr}`}>
-            {posts.length ? ( posts.map((item, index) => (
-              <div key={index}><PostCard post={item} /></div>
-            ))):null}
-          </div>
+          {posts.length ? ( posts.map((item, index) => (
+            <div className={`${flexCtr}`}  key={index}>
+              <div className={`${row}`}>
+                <PostCard post={item} />
+              </div>
+            </div>))):null}
       </div>
     )
 };

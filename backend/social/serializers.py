@@ -4,12 +4,14 @@ from users.models import User
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(
-        default=serializers.CurrentUserDefault()
+        default=serializers.CurrentUserDefault(),
+        read_only = True,
+        source='username'
     )
     class Meta:
         model = Post
         fields = '__all__'
-        read_only_fields = ('comments',)
+        read_only_fields = ('author','comments',)
         ordering = ('-date_created')
         
 class CommentSerializer(serializers.ModelSerializer):

@@ -4,3 +4,7 @@ button.link-btn{
     text-decoration: underline;
     color: rgb(0, 72, 255);
 }
+a.nol{
+    text-decoration: none;
+    color: black;
+}
