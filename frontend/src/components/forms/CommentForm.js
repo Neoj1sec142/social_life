@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { classSheet } from '../../styles/classSheet';
-import { FileUploader } from "react-drag-drop-files";
 import { connect } from 'react-redux';
-import {upload_post} from '../../store/actions/post'
+import {upload_comment} from '../../store/actions/comment'
 
-const PostForm = ({upload_post, current_user, setSubitted, update}) => {
+const CommentForm = ({upload_comment, current_user, setSubitted, update, post_id}) => {
     const {con, flexCtr, row, formG} = classSheet;
-    const fileTypes = ["JPG", "PNG", "GIF"];
     const [formData, setFormData] = useState({
-        body: '',
-        image: null,
-        author: null
+        comment: '',
+        author: null,
+        post: null
     })
-    useEffect(() => {if(current_user.id)setFormData({...formData, author: current_user.id})},[])
-    const { body, image, author } = formData;
+    useEffect(() => {if(current_user.id)setFormData({...formData, author: current_user.id, post: post_id})},[])
+    const { comment, post, author } = formData;
     useEffect(() => {
         if(update.id){
-            setFormData({body: update.body, 
-                image: update.image, 
-                author: update.author})
+            setFormData({comment: update.comment, 
+                author: update.author, 
+                post: update.post})
         }
     },[])
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
     const onSubmit = e => {
         e.preventDefault()
-        upload_post(formData)
+        upload_comment(formData)
         setSubitted(true)
     }
     
@@ -32,7 +30,7 @@ const PostForm = ({upload_post, current_user, setSubitted, update}) => {
         <div className={`${con}`}>
             <div className={`${flexCtr}`}>
                 <div className={`${row}`}>
-                    Post Form Banner
+                    Comment Form Banner
                 </div>
             </div>
 
@@ -41,15 +39,13 @@ const PostForm = ({upload_post, current_user, setSubitted, update}) => {
                     <form onSubmit={e=>onSubmit(e)}  enctype='multipart/form-data'>                 
                         <input type="text" className="form-control" hidden
                             name="author" value={author} />
+                        <input type="text" className="form-control" hidden
+                            name="post" value={post} />
                         <div class={`${formG}`}>                            
                             <textarea type="text" className="form-control" 
-                                name="body" value={body}
-                                maxLength={50} placeholder="Thoughts go here*"
+                                name="comment" value={comment}
+                                maxLength={50} placeholder="Comment goes here*"
                                 onChange={e=>onChange(e)} />
-                        </div>
-                        <div class={`${formG}`}>                            
-                            <FileUploader handleChange={e=>onChange(e)} name="image" 
-                                types={fileTypes} value={image}/>
                         </div>
                     
                         <div className={`${row}`}>
@@ -71,4 +67,4 @@ const mapStateToProps = state => ({
   current_user: state.auth.current_user
 })
 
-export default connect(mapStateToProps, {upload_post})(PostForm);
+export default connect(mapStateToProps, {upload_comment})(CommentForm);

@@ -8,3 +8,19 @@ a.nol{
     text-decoration: none;
     color: black;
 }
+.alert{
+    text-align: center;
+    border: 2px solid rgba(35, 34, 34, 0.488);
+    font-size: 1.8rem;
+    transition: 0.5;
+    color: black;
+    padding: 10px;
+}
+
+.alert--error{
+    background-color: rgb(245, 29, 29);
+}
+.alert--success{
+    background-color: rgb(5, 196, 28);
+}
+
