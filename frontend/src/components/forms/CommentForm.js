@@ -27,7 +27,9 @@ const CommentForm = ({
         console.log(post_id, "POST_ID")
         console.log(formData, "FORM")
         upload_comment(post_id, formData)
-        setSubmitted(false)
+        if(setSubmitted !== undefined){
+            setSubmitted(false)
+        }
     }
     console.log(post, "POSt")
     return (

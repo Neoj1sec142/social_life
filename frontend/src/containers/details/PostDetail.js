@@ -50,10 +50,12 @@ const PostDetail = ({get_post_by_id, post, current_user}) => {
                             : <button>dislike button</button>}
                     </div>
                     <div className='col col-md-5 col-sm-8 shadow-sm m-2 p-3'>
-                        {current_user.id === author
-                            ? <button className='btn btn-primary'>view likes</button> 
-                            : commentMode ? <CommentForm post_id={id} setSubmitted={setCommentMode}/>
-                            : <button className='btn btn-success m-2' onClick={()=>setCommentMode(true)}>comment</button>}
+                        {current_user.id !== author && !commentMode
+                            ? <button className='btn btn-success m-2' onClick={()=>setCommentMode(true)}>comment</button>
+                            : <CommentForm post_id={id} setSubmitted={setCommentMode}/>}
+                        {current_user.id === author 
+                            ? <button className='btn btn-success m-2'>viewlikes</button>
+                            : null}
                     </div>
                 </div>
             </div>
