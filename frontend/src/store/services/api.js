@@ -6,7 +6,7 @@ const Client = axios.create({
     headers: {
         "Authorization": "JWT " + localStorage.getItem('access_token'),
         "Content-Type": "application/json",
-        "accept": "application/json"
+        "accept": "application/json",
     }
 })
 

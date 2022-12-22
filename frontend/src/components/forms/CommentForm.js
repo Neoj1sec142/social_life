@@ -3,18 +3,20 @@ import { classSheet } from '../../styles/classSheet';
 import { connect } from 'react-redux';
 import {upload_comment} from '../../store/actions/comment'
 
-const CommentForm = ({upload_comment, current_user, setSubitted, update, post_id}) => {
+const CommentForm = ({
+    upload_comment, current_user, setSubmitted, update, post_id
+}) => {
     const {con, flexCtr, row, formG} = classSheet;
     const [formData, setFormData] = useState({
         comment: '',
         author: null,
         post: null
     })
-    useEffect(() => {if(current_user.id)setFormData({...formData, author: current_user.id, post: post_id})},[])
+    useEffect(() => {if(current_user)setFormData({...formData, author: current_user.id, post: post_id})},[])
     const { comment, post, author } = formData;
     useEffect(() => {
         if(update !== undefined){
-            setFormData({comment: update.comment, 
+            setFormData({...formData, comment: update.comment, 
                 author: update.author, 
                 post: update.post})
         }
@@ -22,15 +24,17 @@ const CommentForm = ({upload_comment, current_user, setSubitted, update, post_id
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
     const onSubmit = e => {
         e.preventDefault()
+        console.log(post_id, "POST_ID")
+        console.log(formData, "FORM")
         upload_comment(post_id, formData)
-        setSubitted(true)
+        setSubmitted(false)
     }
-    
+    console.log(post, "POSt")
     return (
         <div className={`${con}`}>
             <div className={`${flexCtr}`}>
                 <div className={`${row}`}>
-                    <form onSubmit={e=>onSubmit(e)}  enctype='multipart/form-data'>                 
+                    <form onSubmit={e=>onSubmit(e)}>
                         <input type="text" className="form-control" hidden
                             name="author" value={author} />
                         <input type="text" className="form-control" hidden

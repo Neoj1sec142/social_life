@@ -12,10 +12,10 @@ const PostForm = ({upload_post, current_user, setSubitted, update}) => {
         image: null,
         author: null
     })
-    useEffect(() => {if(current_user.id)setFormData({...formData, author: current_user.id})},[])
+    useEffect(() => {if(current_user)setFormData({...formData, author: current_user.id})},[])
     const { body, image, author } = formData;
     useEffect(() => {
-        if(update.id){
+        if(update !== undefined){
             setFormData({body: update.body, 
                 image: update.image, 
                 author: update.author})

@@ -21,7 +21,7 @@ export const CreateComment = async (post_id, comment) => {
         const data = {
             comment: comment.comment,
             author: comment.author,
-            post: post_id
+            post: comment.post
         }
         console.log(data, "Before axios")
         const res = await Client.post(`social/posts/${post_id}/comments/`, data)

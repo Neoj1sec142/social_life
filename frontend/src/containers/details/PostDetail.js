@@ -18,9 +18,14 @@ const PostDetail = ({get_post_by_id, post, current_user}) => {
             // destroy_post(id)
         }
     }
-
+    // console.log(post , "post")
+    // console.log(id , "id")
+    
     if(!updateMode && current_user.is_active && post){
         const {author, image, body, date_created} = post;
+        // console.log(author, "auhtor")
+        // console.log(body, "body")
+        // console.log(image, "image")
         return (
             <div className={`${con} ${flexCtr} w-100 card my-3 shadow-sm`}>
                 <h1 className='card-header text-center text-decoration-underline'>Posted By: {author}</h1>
@@ -47,8 +52,8 @@ const PostDetail = ({get_post_by_id, post, current_user}) => {
                     <div className='col col-md-5 col-sm-8 shadow-sm m-2 p-3'>
                         {current_user.id === author
                             ? <button className='btn btn-primary'>view likes</button> 
-                            : (commentMode ? <CommentForm post_id={id}/>
-                            : <button className='btn btn-success m-2' onClick={()=>setCommentMode(true)}>comment</button>)}
+                            : commentMode ? <CommentForm post_id={id} setSubmitted={setCommentMode}/>
+                            : <button className='btn btn-success m-2' onClick={()=>setCommentMode(true)}>comment</button>}
                     </div>
                 </div>
             </div>
