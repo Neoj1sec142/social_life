@@ -13,7 +13,7 @@ const CommentForm = ({upload_comment, current_user, setSubitted, update, post_id
     useEffect(() => {if(current_user.id)setFormData({...formData, author: current_user.id, post: post_id})},[])
     const { comment, post, author } = formData;
     useEffect(() => {
-        if(update.id){
+        if(update !== undefined){
             setFormData({comment: update.comment, 
                 author: update.author, 
                 post: update.post})
@@ -22,18 +22,12 @@ const CommentForm = ({upload_comment, current_user, setSubitted, update, post_id
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
     const onSubmit = e => {
         e.preventDefault()
-        upload_comment(formData)
+        upload_comment(post_id, formData)
         setSubitted(true)
     }
     
     return (
         <div className={`${con}`}>
-            <div className={`${flexCtr}`}>
-                <div className={`${row}`}>
-                    Comment Form Banner
-                </div>
-            </div>
-
             <div className={`${flexCtr}`}>
                 <div className={`${row}`}>
                     <form onSubmit={e=>onSubmit(e)}  enctype='multipart/form-data'>                 

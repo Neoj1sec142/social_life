@@ -4,10 +4,12 @@ import { useParams } from 'react-router-dom';
 import { get_post_by_id } from '../../store/actions/post';
 import { classSheet } from '../../styles/classSheet';
 import PostForm from '../../components/forms/PostForm';
+import CommentForm from '../../components/forms/CommentForm';
 
 const PostDetail = ({get_post_by_id, post, current_user}) => {
     const {id} = useParams();
     const [updateMode, setUpdateMode] = useState(false)
+    const [commentMode, setCommentMode] = useState(false)
     const {con, flexCtr, row} = classSheet;
     useEffect(() => {if(id) get_post_by_id(id)}, []);
     const deletePost = e => {
@@ -45,7 +47,8 @@ const PostDetail = ({get_post_by_id, post, current_user}) => {
                     <div className='col col-md-5 col-sm-8 shadow-sm m-2 p-3'>
                         {current_user.id === author
                             ? <button className='btn btn-primary'>view likes</button> 
-                            : <button>comment</button>}
+                            : (commentMode ? <CommentForm post_id={id}/>
+                            : <button className='btn btn-success m-2' onClick={()=>setCommentMode(true)}>comment</button>)}
                     </div>
                 </div>
             </div>

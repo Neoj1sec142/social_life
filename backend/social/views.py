@@ -32,6 +32,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     model = serializer_class.Meta.model
+    permission_classes = (permissions.AllowAny, )
     def get_queryset(self):
         post_id = self.kwargs['post_pk']
         queryset = self.model.objects.filter(post_id=post_id)

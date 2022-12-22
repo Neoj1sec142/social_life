@@ -19,7 +19,7 @@ export const CreateComment = async (post_id, comment) => {
     console.log(comment, "BEfore TRY")
     try {
         const data = {
-            comment: comment.content,
+            comment: comment.comment,
             author: comment.author,
             post: post_id
         }

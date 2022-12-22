@@ -4,9 +4,10 @@ from users.models import User
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(
-        default=serializers.CurrentUserDefault(),
-        read_only = True,
-        source='username'
+        # default=serializers.CurrentUserDefault(),
+        # read_only = True,
+        # source='username'
+        queryset=User.objects.all(),
     )
     class Meta:
         model = Post
