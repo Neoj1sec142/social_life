@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, UserProfile
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class UserSerializer(serializers.ModelSerializer):
@@ -29,7 +29,20 @@ class UserDetailSerializer(serializers.ModelSerializer):
         lookup_field = 'username'
 
 
-
+class UserProfileSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        # source='user'
+    )
+    # followers = serializers.PrimaryKeyRelatedField(
+    #     queryset=User.objects.all(),
+    #     # source='followers'
+    # )
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+        read_only_fields = ('user', 'followers')
+        ordering = ('-date_created')
 
 # class UserAllDetailsSerializer(serializers.ModelSerializer):
 #     # languages = LanguageSerializer(many=True, read_only=True)

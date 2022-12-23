@@ -2,24 +2,26 @@ import React, {useEffect} from 'react'
 import { classSheet } from '../../styles/classSheet';
 import { connect } from 'react-redux';
 import {load_user_profile_by_id} from '../../store/actions/userProfile'
+import { useStateContext } from '../../utils/ContextProvider';
 
 const Profile = ({load_user_profile_by_id, userProfile, current_user}) => {
   const {con, flexCtr, row, formG} = classSheet;
   // console.log(userProfile, "Profile User")
   useEffect(() => {if(current_user) load_user_profile_by_id(current_user.id)},[])
-  //  <img className='img-thumbnail' src={} alt=''/> 
+  const {setDashboard} = useStateContext()
   if(userProfile){
     const {bio, birth_date, date_created, followers, location, name, picture} = userProfile;
     if(bio !== '' && location !== '' && name !== ''){
       return(
-        <div className={`${con}`}>
+        <div className={`${con} top-0`}>
           <div className={`${flexCtr}`}>
-            <div className='card w-50 m-3 p-3 profile-card'>
+            <div className='card w-50 p-3 profile-card'>
               <img className='img-thumbnail' src={picture} alt='' />
               <h3 className='text-center'>{name}'s Profile</h3>
               <p className='fs-4 ms-2'>Location: {location}</p>
               {/* <p className='m-2 p-3'>Followers: {followers !== [] ? followers.Length : '0'}</p> */}
               <p className='m-2 p-3'>About Me:<br /> {bio}</p>
+              <button className='btn btn-primary m-2' onClick={()=>setDashboard('accountForm')}>Set Up Account</button>
             </div>
           </div>
         </div>
@@ -28,7 +30,7 @@ const Profile = ({load_user_profile_by_id, userProfile, current_user}) => {
       return(
         <div>
           <h1 className='text-center'>You have not set up your account</h1>
-          <button className='btn btn-primary m-2'>Set Up Account</button>
+          <button className='btn btn-primary m-2' onClick={()=>setDashboard('accountForm')}>Set Up Account</button>
         </div>
         )
     }

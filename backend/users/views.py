@@ -3,8 +3,8 @@ from rest_framework.response import Response
 # from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import User
-from .serializers import UserSerializer, UserDetailSerializer#, UserAllDetailsSerializer
+from .models import User, UserProfile
+from .serializers import UserSerializer, UserDetailSerializer, UserProfileSerializer#, UserAllDetailsSerializer
 
 class UserList(generics.ListCreateAPIView):
   permission_classes = (permissions.AllowAny,)
@@ -48,3 +48,20 @@ class UserLogout(APIView):
         token = RefreshToken(refresh_token)
         token.blacklist()
         return Response(status=status.HTTP_205_RESET_CONTENT)
+    
+class UserProfileList(generics.ListCreateAPIView):
+    serializer_class = UserProfileSerializer
+    # model = serializer_class.Meta.model
+    permission_classes = (permissions.AllowAny,)
+    class Meta:
+        model = UserProfile
+        fields = ('__all__')
+        lookup_field = 'pk'
+        ordering = ('-date_created')
+
+
+class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.AllowAny,)
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    

@@ -6,8 +6,7 @@ urlpatterns = [
     path('posts/<int:pk>/', PostDetail.as_view()),
     path('posts/<int:post_pk>/comments/', CommentList.as_view()),
     path('posts/<int:post_pk>/comments/<int:pk>/', CommentDetail.as_view()),
-    path('profile/', UserProfileList.as_view()),
-    path('profile/<int:pk>/', UserProfileDetail.as_view()),
+    
     path('posts/<int:pk>/like/', AddLike.as_view()),
     path('posts/<int:pk>/dislike/', AddDislike.as_view()),
     

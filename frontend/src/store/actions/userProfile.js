@@ -49,11 +49,10 @@ export const load_user_profile_by_id = (id) => async dispatch => {
 }
 export const update_user_profile = (id, profile) => async dispatch => {
     try{
-        const res = UpdateProfile(id, profile)
+        const res = await UpdateProfile(id, profile)
         if(res.status === 200 || res.status === 201){
             dispatch({
-                type: USERPROFILE_UPDATE_SUCCESS,
-                payload: res.data
+                type: USERPROFILE_UPDATE_SUCCESS
             })
             dispatch(setAlert('Profile Updated Successfully', 'success'))
         }else{

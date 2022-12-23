@@ -1,0 +1,2 @@
+Data : {'withCredentials': True, 'bio': 'asdfasdf', 'birth_date': '2-2-2222', 'location': 'Chicago', 'picture': 'http://localhost:8000/media/uploads/profile_pictures/default.jpg'} 
+ Request Data: {'withCredentials': True, 'bio': 'asdfasdf', 'birth_date': '2-2-2222', 'location': 'Chicago', 'picture': 'http://localhost:8000/media/uploads/profile_pictures/default.jpg'}

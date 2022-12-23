@@ -39,16 +39,18 @@ export const GetProfiles = async () => {
 
 export const GetProfileDetail = async (id) => {
     try{
-        const res = await Client.get(`social/profile/${id}/`)
+        const res = await Client.get(`social/profiles/${id}/`)
         console.log(res, "User Profile RES")
         return res
     }catch(err){throw err}
 }
 
-export const UpdateProfile = async (id, profileDetails) => {
+export const UpdateProfile = async (id, profile) => {
+    // console.log(profile, "BEFORE TRY")
     try {
-        const res = await Client.put(`social/profile/${id}/`, profileDetails)
-        return res.data
+        const res = await Client.put(`social/profiles/${id}/`, profile)
+        console.log(res, "UPDATE RES")
+        return res
       } catch (err) {throw err}
 }
 

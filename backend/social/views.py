@@ -1,9 +1,10 @@
 from rest_framework import generics, permissions, status, serializers
-# from rest_framework.mixins import CreateModelMixin
 from rest_framework.views import APIView
+from rest_framework.generics import UpdateAPIView
 from rest_framework.response import Response
-from .models import Post, Comment, UserProfile, ThreadModel, Message
-from .serializers import PostSerializer, CommentSerializer, UserProfileSerializer, ThreadModelSerializer, MessageSerializer
+from .models import Post, Comment, ThreadModel, Message
+from users.models import User
+from .serializers import PostSerializer, CommentSerializer, ThreadModelSerializer, MessageSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin
 class PostListView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
@@ -105,22 +106,34 @@ class AddDislike(APIView):
 
 # ProfileView
 # ProfileEditView
-class UserProfileList(generics.ListCreateAPIView):
-    serializer_class = UserProfileSerializer
-    # model = serializer_class.Meta.model
-    permission_classes = (permissions.AllowAny,)
-    class Meta:
-        model = UserProfile
-        fields = ('__all__')
-        lookup_field = 'pk'
-        ordering = ('-date_created')
 
-
-class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
-    
-    permission_classes = (permissions.AllowAny,)
+        
+# class UpdateUserProfileView(UpdateAPIView):
+#      def put(self, request, *args, **kwargs):
+#         try:
+#             data = self.request.data
+#             with open('../TextStonch.txt', 'w') as f:
+#                 f.write(f'Data : {data} \n Request Data: {request.data}')
+#             name = data['name']
+#             user = data['user']
+#             bio = data['bio']
+#             birth_date = data['birth_date']
+#             location = data['location']
+#             picture = data['picture']
+#             UserProfile.objects.filter(user=user).update(
+#                 name=name, bio=bio, birth_date=birth_date,
+#                 location=location, picture=picture)
+#             user_profile = UserProfile.objects.get(user=user)
+#             user_profile = UserProfileSerializer(user_profile)
+#             profile = user_profile.save()
+#             if user_profile:
+#                 return Response({'data': user_profile, 'success': 'Successful Update', 'status': 200})
+#             else:
+#                 return Response({'data': profile, 'error': 'Error Updating', 'status': 205})
+#         except:
+#             return Response({'error': 'Error updating profile'})
+        
+        
 # AddFollower
 # RemoveFollower
 class ListFollowers(APIView):

@@ -20,14 +20,15 @@ export default function(state = initialState, action){
                 ...state,
                 userProfiles: payload
             }
-        case FOLLOW_USERPROFILE_SUCCESS:
-        case UNFOLLOW_USERPROFILE_SUCCESS:
-        case USERPROFILE_UPDATE_SUCCESS:
+        
         case LOAD_USERPROFILE_SUCCESS:
             return{
                 ...state,
                 userProfile: payload
             }
+        case FOLLOW_USERPROFILE_SUCCESS:
+        case UNFOLLOW_USERPROFILE_SUCCESS:
+        case USERPROFILE_UPDATE_SUCCESS:
         case LOAD_USERPROFILES_FAIL:
         case LOAD_USERPROFILE_FAIL:
         case USERPROFILE_UPDATE_FAIL:

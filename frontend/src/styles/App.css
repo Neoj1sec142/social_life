@@ -2,7 +2,9 @@
 /* Sidebar Styles */
 .sidebar {
   box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
-  position: fixed;
+  z-index: 10;
+  top: 0;
+  margin-top: 5%;
 }
 .nav-item,
 .navbar {
@@ -57,4 +59,19 @@ button.link-btn{
 a.nol{
     text-decoration: none;
     color: black;
+}
+.left-col{
+  width: 20%;
+  margin-left: 0%;
+  margin-right: 80%;
+  float: left;
+}
+.right-col{
+  width: 80%;
+  float: right;
+  margin-top: 20%;
+  top: 0;
+  position: absolute;
+  margin-left: 20%;
+  margin-right: 0%;
 }

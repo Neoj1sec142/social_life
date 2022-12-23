@@ -38,11 +38,11 @@ const PostDetail = ({get_post_by_id, post, current_user}) => {
                             <div className={`col col-md-5 col-sm-8 shadow-sm m-2 p-3`}>
                                 {current_user.id === author 
                                     ? <button className='btn btn-warning m-2' onClick={()=>setUpdateMode(true)}>Edit</button> 
-                                    : <button className='btn btn-warning m-2'>like button</button>}
+                                    : <button className='btn btn-outline-primary m-2'><i class='far fa-thumbs-up'/></button>}
                             
                                 {current_user.id === author
                                     ? <button className='btn btn-danger m-2' onClick={e=>deletePost(e)}>Delete</button> 
-                                    : <button className='btn btn-warning m-2'>dislike button</button>}
+                                    : <button className='btn btn-outline-primary m-2'><i class='far fa-thumbs-down'/></button>}
                             
                                 {current_user.id !== author && !commentMode
                                     ? <button className='btn btn-success m-2' onClick={()=>setCommentMode(true)}>comment</button>
