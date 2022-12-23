@@ -37,12 +37,12 @@ class CommentSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
-        source='self'
+        # source='user'
     )
-    followers = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all(),
-        # source='followers'
-    )
+    # followers = serializers.PrimaryKeyRelatedField(
+    #     queryset=User.objects.all(),
+    #     # source='followers'
+    # )
     class Meta:
         model = UserProfile
         fields = '__all__'

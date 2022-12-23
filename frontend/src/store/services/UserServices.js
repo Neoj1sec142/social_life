@@ -32,21 +32,22 @@ export const RemoveUser = async (id) => {
 
 export const GetProfiles = async () => {
     try{
-        const res = await Client.get('profiles/')
+        const res = await Client.get('social/profile/')
         return res.data
     }catch(err){throw err}
 }
 
 export const GetProfileDetail = async (id) => {
     try{
-        const res = await Client.get(`profiles/${id}/`)
+        const res = await Client.get(`social/profile/${id}/`)
+        console.log(res, "User Profile RES")
         return res
     }catch(err){throw err}
 }
 
 export const UpdateProfile = async (id, profileDetails) => {
     try {
-        const res = await Client.put(`profiles/${id}/`, profileDetails)
+        const res = await Client.put(`social/profile/${id}/`, profileDetails)
         return res.data
       } catch (err) {throw err}
 }

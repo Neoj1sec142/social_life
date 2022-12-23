@@ -1,13 +1,35 @@
-button.link-btn{
-    background-color: white;
-    border: none;
-    text-decoration: underline;
-    color: rgb(0, 72, 255);
+@import url('https://cdn.syncfusion.com/ej2/material.css');
+/* Sidebar Styles */
+.sidebar {
+  box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
+  position: fixed;
 }
-a.nol{
-    text-decoration: none;
-    color: black;
+.nav-item,
+.navbar {
+  z-index: 10000;
 }
+@media  screen and (max-width:800px) {
+  .sidebar{
+    z-index: 10000000;
+  }
+}
+
+.e-dlg-center-center, .e-quick-popup-wrapper.e-device{
+  z-index: 1000000 !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(216, 216, 216);
+  border-radius: 40px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Alert Styles */
 .alert{
     text-align: center;
     border: 2px solid rgba(35, 34, 34, 0.488);
@@ -24,3 +46,15 @@ a.nol{
     background-color: rgb(5, 196, 28);
 }
 
+/* Custom Styles */
+
+button.link-btn{
+    background-color: white;
+    border: none;
+    text-decoration: underline;
+    color: rgb(0, 72, 255);
+}
+a.nol{
+    text-decoration: none;
+    color: black;
+}

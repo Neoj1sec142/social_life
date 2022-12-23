@@ -1,12 +1,16 @@
-import React, {useEffect, useState} from 'react'
-import Sidebar from '../components/base/Dashbar'
+import React, {Fragment, useEffect, useState} from 'react'
 import { useStateContext } from '../utils/ContextProvider'
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { AiOutlineMenu } from 'react-icons/ai';
+import { connect } from 'react-redux';
+import Sidebar from '../components/base/Dashbar'
 import Profile from '../components/profile/Profile';
 
 const NavButton = ({ title, customFunc, icon, color }) => (
-  <TooltipComponent content={title} position="BottomCenter">
+  <TooltipComponent content={title} style={{
+    left: 0, marginLeft: '2%', marginRight: '95%'
+  }} position="TopLeft" >
+  
     <button
       type="button"
       onClick={() => customFunc()}
@@ -36,13 +40,21 @@ const Dashboard = () => {
   },[dashboard])
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
   return (
-    <>
+    <Fragment>
     <div>
       {inEffect}
     </div>
-    {activeMenu ? <Sidebar /> : <NavButton title="Menu" customFunc={handleActiveMenu} color="red" icon={<AiOutlineMenu />} />}
-    </>
+    {activeMenu ? (
+      <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+        <Sidebar />
+      </div>
+    ) : (
+      <div className="w-0 dark:bg-secondary-dark-bg">
+        <NavButton title="Menu" customFunc={handleActiveMenu} color="red" icon={<AiOutlineMenu />} />
+      </div>
+    )}
+    </Fragment>
   )
 }
 
-export default Dashboard
+export default connect(null, {})(Dashboard)

@@ -107,8 +107,8 @@ class AddDislike(APIView):
 # ProfileEditView
 class UserProfileList(generics.ListCreateAPIView):
     serializer_class = UserProfileSerializer
-    model = serializer_class.Meta.model
-    
+    # model = serializer_class.Meta.model
+    permission_classes = (permissions.AllowAny,)
     class Meta:
         model = UserProfile
         fields = ('__all__')
@@ -117,9 +117,9 @@ class UserProfileList(generics.ListCreateAPIView):
 
 
 class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
-    # queryset = UserProfile.objects.all()
+    queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
-    model = serializer_class.Meta.model
+    
     permission_classes = (permissions.AllowAny,)
 # AddFollower
 # RemoveFollower

@@ -25,7 +25,9 @@ const Dashbar = () => {
           <Link to='/' onClick={handleCloseSidebar} className='items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900'>
             <SiShopware /> <span>Social Earth</span>
           </Link>
-          <TooltipComponent content=" " position="BottomCenter">
+          <TooltipComponent content="Close" style={{
+            left: 0, marginLeft: '2%', marginRight: '95%'
+          }} position="TopLeft" >
             <button type='button' onClick={()=>{setActiveMenu((prevActiveMenu)=>!prevActiveMenu)}} className='text-xl rounded-full p-3 hover:bg-light-gray mt-4 m-2 block md:hidden'>
               <MdOutlineCancel />
             </button>
