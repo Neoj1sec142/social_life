@@ -27,35 +27,31 @@ const PostDetail = ({get_post_by_id, post, current_user}) => {
         // console.log(body, "body")
         // console.log(image, "image")
         return (
-            <div className={`${con} ${flexCtr} w-100 card my-3 shadow-sm`}>
-                <h1 className='card-header text-center text-decoration-underline'>Posted By: {author}</h1>
-                {image ? <div className={`${row} text-center`}>
-                    <img src={image} alt='' /> 
-                </div>: null}
-                <div className={`${row} text-center`}>
-                    <p className=''>{body}</p>
-                </div>
-                <div className={`${row} text-center`}>
-                    <p className='fs-3'>Posted On: {date_created}</p>
-                </div>
-                <div className={`${row} flex-inline text-center`}>
-                    <div className='col col-md-5 col-sm-8 shadow-sm m-2 p-3'>
-                        {current_user.id === author 
-                            ? <button className='btn btn-warning' onClick={()=>setUpdateMode(true)}>Edit</button> 
-                            : <button>like button</button>}
-                    </div>
-                    <div className='col col-md-5 col-sm-8 shadow-sm m-2 p-3'>
-                        {current_user.id === author
-                            ? <button className='btn btn-danger' onClick={e=>deletePost(e)}>Delete</button> 
-                            : <button>dislike button</button>}
-                    </div>
-                    <div className='col col-md-5 col-sm-8 shadow-sm m-2 p-3'>
-                        {current_user.id !== author && !commentMode
-                            ? <button className='btn btn-success m-2' onClick={()=>setCommentMode(true)}>comment</button>
-                            : <CommentForm post_id={id} setSubmitted={setCommentMode}/>}
-                        {current_user.id === author 
-                            ? <button className='btn btn-success m-2'>viewlikes</button>
-                            : null}
+            <div className={`${con} w-100 m-2`}>
+                <div className={`${flexCtr} w-100 mt-3`}>
+                    <div className='w-75 card m-3 shadow-sm text-center'>
+                        <h1 className='card-header text-decoration-underline m-2 p-2'>Posted By: {author}</h1>
+                        {image ? <img src={image} className='m-2 p-2' alt='' /> : null}
+                        <p className='m-2 p-2'>{body}</p>    
+                        <p className='fs-3 m-2 p-2'>Posted On: {date_created}</p>
+                        <div className={`row text-center ${flexCtr}`}>
+                            <div className={`col col-md-5 col-sm-8 shadow-sm m-2 p-3`}>
+                                {current_user.id === author 
+                                    ? <button className='btn btn-warning m-2' onClick={()=>setUpdateMode(true)}>Edit</button> 
+                                    : <button className='btn btn-warning m-2'>like button</button>}
+                            
+                                {current_user.id === author
+                                    ? <button className='btn btn-danger m-2' onClick={e=>deletePost(e)}>Delete</button> 
+                                    : <button className='btn btn-warning m-2'>dislike button</button>}
+                            
+                                {current_user.id !== author && !commentMode
+                                    ? <button className='btn btn-success m-2' onClick={()=>setCommentMode(true)}>comment</button>
+                                    : <CommentForm post_id={id} setSubmitted={setCommentMode}/>}
+                                {current_user.id === author 
+                                    ? <button className='btn btn-success m-2'>viewlikes</button>
+                                    : null}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

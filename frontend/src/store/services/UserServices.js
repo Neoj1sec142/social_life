@@ -51,10 +51,3 @@ export const UpdateProfile = async (id, profileDetails) => {
       } catch (err) {throw err}
 }
 
-export const RemoveProfile = async (id) => {
-    try{
-        await Client.delete(`profiles/${id}`)
-        .then((res) => console.log(res, "Successfully removed user"))
-        .catch((err) => console.log(err))
-    } catch (err) {throw err}
-}

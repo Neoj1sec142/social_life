@@ -1,8 +1,11 @@
 import React, { Fragment } from 'react'
 import Alert from '../../utils/Alert'
+
 const Navbar = () => {
+  
   return (
     <Fragment>
+      
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="!#">Social Earth</a>

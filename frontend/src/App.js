@@ -10,6 +10,7 @@ import PostDetail from './containers/details/PostDetail';
 import './styles/App.css';
 
 const App = ({isAuthenticated}) => {
+  
   return (
     <div className="App">
       <Layout>
