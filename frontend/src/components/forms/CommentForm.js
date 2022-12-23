@@ -13,25 +13,25 @@ const CommentForm = ({
         post: null
     })
     useEffect(() => {if(current_user)setFormData({...formData, author: current_user.id, post: post_id})},[])
-    const { comment, post, author } = formData;
-    useEffect(() => {
-        if(update !== undefined){
-            setFormData({...formData, comment: update.comment, 
-                author: update.author, 
-                post: update.post})
-        }
-    },[])
+    const { comment, author, post } = formData;
+    // useEffect(() => {
+    //     if(update !== undefined){
+    //         setFormData({...formData, comment: update.comment, 
+    //             author: update.author, 
+    //             post: update.post})
+    //     }
+    // },[])
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
     const onSubmit = e => {
         e.preventDefault()
         console.log(post_id, "POST_ID")
         console.log(formData, "FORM")
         upload_comment(post_id, formData)
-        if(setSubmitted !== undefined){
-            setSubmitted(false)
-        }
+        // if(setSubmitted !== undefined){
+        //     setSubmitted(false)
+        // }
     }
-    console.log(post, "POSt")
+    // console.log(post, "POSt")
     return (
         <div className={`${con}`}>
             <div className={`${flexCtr}`}>

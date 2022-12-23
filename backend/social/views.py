@@ -1,11 +1,10 @@
 from rest_framework import generics, permissions, status, serializers
-from rest_framework.mixins import CreateModelMixin
-from django.views.decorators.csrf import csrf_exempt, requires_csrf_token
+# from rest_framework.mixins import CreateModelMixin
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Post, Comment, UserProfile, ThreadModel, Message
 from .serializers import PostSerializer, CommentSerializer, UserProfileSerializer, ThreadModelSerializer, MessageSerializer
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 class PostListView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
@@ -31,30 +30,13 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 #         return queryset
 
 class CommentList(generics.ListCreateAPIView):
+    permission_classes = (permissions.AllowAny, )
     serializer_class = CommentSerializer
-    # model = serializer_class.Meta.model
-    permission_classes = (permissions.AllowAny,)
     
     def get_queryset(self):
         post_id = self.kwargs['post_pk']
         queryset = self.model.objects.filter(post_id=post_id)
         return queryset
-    
-    def post(self, request, post_pk, *args, **kwargs):
-        post = Post.objects.get(pk=post_pk)
-        author = serializers.CurrentUserDefault()
-        serializer = CommentSerializer(data=request.data)
-        parent_comment = Comment.objects.get(pk=post_pk)
-        if serializer.is_valid():
-            new_comment = serializer.save(commit=False)
-            new_comment.author = request.data.author
-            new_comment.post = post
-            new_comment.parent = parent_comment
-            new_comment.save()
-            if new_comment:
-                return Response(request, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
     class Meta:
         model = Comment
         fields = ('__all__')

@@ -18,16 +18,16 @@ class PostSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
-        source='user'
+        # source='user'
     )
     post = serializers.PrimaryKeyRelatedField(
         queryset=Post.objects.all(),
         # source='post'
     )
-    parent = serializers.PrimaryKeyRelatedField(
-        queryset=Comment.objects.all(),
-        source='self'
-    )
+    # parent = serializers.PrimaryKeyRelatedField(
+    #     queryset=Comment.objects.all(),
+    #     source='self'
+    # )
     class Meta:
         model = Comment
         fields = '__all__'

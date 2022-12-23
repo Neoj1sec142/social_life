@@ -16,7 +16,7 @@ export default function(state = initialState, action){
         case LOAD_COMMENTS_SUCCESS:
             return{
                 ...state,
-                COMMENTs: payload
+                comments: payload
             }
         case LIKE_COMMENT_SUCCESS:
         case DISLIKE_COMMENT_SUCCESS:
@@ -24,7 +24,7 @@ export default function(state = initialState, action){
         case LOAD_COMMENT_SUCCESS:
             return{
                 ...state,
-                COMMENT: payload
+                comment: payload
             }
         case UPLOAD_COMMENT_SUCCESS:
         case DESTROY_COMMENT_SUCCESS:

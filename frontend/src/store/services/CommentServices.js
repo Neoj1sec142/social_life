@@ -18,11 +18,12 @@ export const GetCommentById = async (post_id, id) => {
 export const CreateComment = async (post_id, comment) => {
     console.log(comment, "BEfore TRY")
     try {
-        const data = {
+        let data = {
             comment: comment.comment,
             author: comment.author,
             post: comment.post
         }
+        // data = JSON.stringify("data", data)
         console.log(data, "Before axios")
         const res = await Client.post(`social/posts/${post_id}/comments/`, data)
         return res

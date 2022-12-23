@@ -4,8 +4,8 @@ from .views import *
 urlpatterns = [
     path('posts/', PostListView.as_view()),
     path('posts/<int:pk>/', PostDetail.as_view()),
-    path('posts/<int:post_pk>/comment/', CommentList.as_view()),
-    path('posts/<int:post_pk>/comment/<int:pk>/', CommentDetail.as_view()),
+    path('posts/<int:post_pk>/comments/', CommentList.as_view()),
+    path('posts/<int:post_pk>/comments/<int:pk>/', CommentDetail.as_view()),
     path('profile/<int:pk>/', UserProfileList.as_view()),
     path('profile/edit/<int:pk>/', UserProfileDetail.as_view()),
     path('posts/<int:pk>/like/', AddLike.as_view()),

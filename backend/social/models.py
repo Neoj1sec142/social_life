@@ -21,16 +21,16 @@ class Comment(models.Model):
     date_modified = models.DateTimeField(auto_now=True, null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='+')
-    @property
-    def children(self):
-        return Comment.objects.filter(parent=self).order_by('-created_on').all()
-    @property
-    def is_parent(self):
-        if self.parent is None:
-            return True
-        else:
-            return False
+    # parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='+')
+    # @property
+    # def children(self):
+    #     return Comment.objects.filter(parent=self).order_by('-created_on').all()
+    # @property
+    # def is_parent(self):
+    #     if self.parent is None:
+    #         return True
+    #     else:
+    #         return False
 class UserProfile(models.Model):
     user = models.OneToOneField(User, primary_key=True, verbose_name='user', on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(max_length=30, blank=True, null=True)
