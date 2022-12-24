@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {logout} from '../../store/actions/auth'
 import { connect } from 'react-redux';
-import { useEffect } from 'react';
 
 const Logout = ({logout}) => {
-    useEffect(()=>{ logout() },[])
+    useEffect(() => { logout() },[])
 
     return(
       <div className='container-fluid'>
