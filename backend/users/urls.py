@@ -9,11 +9,11 @@ urlpatterns = [
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(),    name='token-refresh'),
     path('blacklist/', UserLogout.as_view(), name='token-blacklist'),
     # User Routes
-    path('users/', UserList.as_view(), name='user_list'),
-    path('users/create/', UserCreate.as_view(), name='user_create'),
-    path('users/<int:pk>/', UserDetail.as_view(), name='user_detail'),
-    path('users/logout/', UserLogout.as_view(), name='user_logout'),
-    path('users/<str:username>/', UserDetailByUsername.as_view(), name='user_detail_by_username'),
+    path('users/', UserList.as_view()),
+    path('users/create/', UserCreate.as_view()),
+    path('users/<int:pk>/', UserDetail.as_view()),
+    path('users/logout/', UserLogout.as_view()),
+    path('users/<str:username>/', UserDetailByUsername.as_view()),
     # Profile Routes
     path('profiles/', UserProfileList.as_view()),
     path('profiles/<int:pk>/', UserProfileDetail.as_view()),

@@ -1,5 +1,6 @@
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
+
 # from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -51,7 +52,7 @@ class UserLogout(APIView):
     
 class UserProfileList(generics.ListCreateAPIView):
     serializer_class = UserProfileSerializer
-    # model = serializer_class.Meta.model
+    model = serializer_class.Meta.model
     permission_classes = (permissions.AllowAny,)
     class Meta:
         model = UserProfile
@@ -61,7 +62,9 @@ class UserProfileList(generics.ListCreateAPIView):
 
 
 class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.AllowAny,)
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+    permission_classes = (permissions.AllowAny, )
+    
+    
     

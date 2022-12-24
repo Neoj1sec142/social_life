@@ -1,4 +1,4 @@
-import {GetProfiles, GetProfileDetail, UpdateProfile} from '../services/UserServices'
+import {GetProfiles, GetProfileDetail, UpdateProfile} from '../services/ProfileServices'
 import {
     LOAD_USERPROFILES_SUCCESS, LOAD_USERPROFILES_FAIL, 
     LOAD_USERPROFILE_SUCCESS, LOAD_USERPROFILE_FAIL, 

@@ -6,13 +6,13 @@ import {load_user_profile_by_id, update_user_profile} from '../../store/actions/
 
 const ProfileForm = ({load_user_profile_by_id, update_user_profile, current_user, userProfile}) => {
     const {con, flexCtr, row, formG, lst, lstI} = classSheet;
-    const fileTypes = ["JPG", "PNG", "GIF"];
+    // const fileTypes = ["JPG", "PNG", "GIF"];
     const [formData, setFormData] = useState({
         bio: '',
         birth_date: '',
         location: '',
         name: '',
-        picture: null,
+        // picture: null,
         user: null
     })
     useEffect(() => {if(current_user) load_user_profile_by_id(current_user.id)},[])
@@ -23,12 +23,12 @@ const ProfileForm = ({load_user_profile_by_id, update_user_profile, current_user
                 birth_date: userProfile.birth_date,
                 location: userProfile.location,
                 name: userProfile.name,
-                picture: userProfile.picture,
+                // picture: userProfile.picture,
                 user: current_user.id
             })
         }
     },[])
-    const { bio, birth_date, location, name, picture, user } = formData;
+    const { bio, birth_date, location, name, user } = formData;
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
     const onSubmit = e => {
         e.preventDefault()
@@ -66,10 +66,10 @@ const ProfileForm = ({load_user_profile_by_id, update_user_profile, current_user
                                 maxLength={50} placeholder={birth_date ? birth_date : "Birth Date"}
                                 onChange={e=>onChange(e)} />
                         </div>
-                        <div class={`${formG}`}>                            
+                        {/* <div class={`${formG}`}>                            
                             <FileUploader handleChange={e=>onChange(e)} name="picture" 
                                 types={fileTypes} value={picture}/>
-                        </div>
+                        </div> */}
                         <div class={`${formG}`}>                            
                             <textarea type="text" className="form-control" 
                                 name="bio" value={bio}

@@ -30,10 +30,11 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all(),
-        # source='user'
-    )
+    # user = serializers.PrimaryKeyRelatedField(
+    #     queryset=User.objects.all(),
+    #     # source='user'
+    # )
+    user = UserSerializer(many=False, read_only=True,)
     # followers = serializers.PrimaryKeyRelatedField(
     #     queryset=User.objects.all(),
     #     # source='followers'
