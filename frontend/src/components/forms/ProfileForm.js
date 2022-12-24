@@ -3,10 +3,12 @@ import { classSheet } from '../../styles/classSheet';
 import { FileUploader } from "react-drag-drop-files";
 import { connect } from 'react-redux';
 import {load_user_profile_by_id, update_user_profile} from '../../store/actions/userProfile'
+import { useStateContext } from '../../utils/ContextProvider';
 
 const ProfileForm = ({load_user_profile_by_id, update_user_profile, current_user, userProfile}) => {
     const {con, flexCtr, row, formG, lst, lstI} = classSheet;
     // const fileTypes = ["JPG", "PNG", "GIF"];
+    const {setDashboard} = useStateContext();
     const [formData, setFormData] = useState({
         bio: '',
         birth_date: '',
@@ -33,6 +35,10 @@ const ProfileForm = ({load_user_profile_by_id, update_user_profile, current_user
     const onSubmit = e => {
         e.preventDefault()
         update_user_profile(current_user.id, formData) 
+    }
+    const cancel = e => {
+        e.preventDefault()
+        setDashboard('profile')
     }
     
     return (
@@ -81,8 +87,8 @@ const ProfileForm = ({load_user_profile_by_id, update_user_profile, current_user
                                 <button className='btn btn-success m-2' type='submit'>Update</button>
                             </div>
                             <div className='col col-md-12 col-sm-5 p-2'>
-                            {/* <button className='btn btn-danger m-2' type='cancel' 
-                                onClick={e=>cancel(e)}>Cancel</button> */}
+                            <button className='btn btn-danger m-2' type='cancel' 
+                                onClick={e=>cancel(e)}>Cancel</button>
                             </div>
                         </div>
                     </form>

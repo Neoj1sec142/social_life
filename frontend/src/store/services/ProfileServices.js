@@ -3,14 +3,14 @@ import Client from './api'
 
 export const GetProfiles = async () => {
     try{
-        const res = await Client.get('social/profile/')
+        const res = await Client.get('profiles/')
         return res
     }catch(err){throw err}
 }
 
 export const GetProfileDetail = async (id) => {
     try{
-        const res = await Client.get(`social/profiles/${id}/`)
+        const res = await Client.get(`profiles/${id}/`)
         console.log(res, "User Profile RES")
         return res
     }catch(err){throw err}
@@ -26,7 +26,7 @@ export const UpdateProfile = async (id, profile) => {
             birth_date: profile.birth_date,
             bio: profile.bio
         }
-        const res = await Client.put(`social/profiles/${id}/`, data)
+        const res = await Client.put(`profiles/${id}/`, data)
         console.log(res, "UPDATE RES")
         return res
       } catch (err) {throw err}
