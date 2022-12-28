@@ -7,6 +7,7 @@ import { useStateContext } from '../../utils/ContextProvider';
 const Profile = ({load_user_profile_by_id, userProfile, current_user}) => {
   const {con, flexCtr, lst, lstI} = classSheet;
   // console.log(userProfile, "Profile User")
+  
   useEffect(() => {if(current_user) load_user_profile_by_id(current_user.id)},[])
   const {setDashboard} = useStateContext()
   if(userProfile){

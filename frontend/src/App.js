@@ -8,6 +8,7 @@ import Logout from './components/base/Logout';
 import FeedPage from './containers/FeedPage';
 import PostDetail from './containers/details/PostDetail';
 import './styles/App.css';
+import ProfilePage from './components/profile/ProfilePage';
 // import ProfileForm from './components/forms/ProfileForm';
 
 const App = ({isAuthenticated}) => {
@@ -22,7 +23,7 @@ const App = ({isAuthenticated}) => {
           {/* Protected Routes */}
           <Route path='/dashboard' element={isAuthenticated ? <Dashboard /> : <AuthPage />} />
           <Route path='/feed' element={isAuthenticated ? <FeedPage /> : <AuthPage />}/> 
-          {/* <Route path='/update-profile' element={isAuthenticated ? <ProfileForm /> : <AuthPage />}/>  */}
+          <Route path='/profile/:id' element={isAuthenticated ? <ProfilePage /> : <AuthPage />}/> 
           <Route path='/post/:id' element={isAuthenticated ? <PostDetail /> : <AuthPage />}/> 
         </Routes>
       </Layout>

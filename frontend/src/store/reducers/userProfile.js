@@ -10,6 +10,7 @@ import {
 const initialState = {
     userProfiles: [],
     userProfile: {},
+    followers: []
 }
 
 export default function(state = initialState, action){

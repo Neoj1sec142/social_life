@@ -69,5 +69,6 @@ export const update_user_profile = (id, profile) => async dispatch => {
     }    
 }
 
+// export const load_followers = () => async dispatch => {}
 // export const follow_user_profile = () => async dispatch => {}
 // export const unfollow_user_profile = () => async dispatch => {}

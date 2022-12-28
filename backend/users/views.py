@@ -68,4 +68,18 @@ class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.AllowAny, )
     
     
+class ListFollowers(generics.ListCreateAPIView):
+    serializer_class = UserProfileSerializer
+    # model = serializer_class.Meta.model
+    # queryset = UserProfile.objects.get(pk=pk).followers.all()
+    permission_classes = (permissions.AllowAny,)
+    def get_queryset(self, pk, *args, **kwargs):
+        profile = UserProfile.objects.get(pk=pk)
+        queryset = profile.followers.all()
+        return queryset
     
+    class Meta:
+        model = UserProfile
+        fields = ('__all__')
+        lookup_field = 'pk'
+        ordering = ('-date_created')

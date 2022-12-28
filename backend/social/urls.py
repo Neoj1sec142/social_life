@@ -9,6 +9,8 @@ urlpatterns = [
     
     path('posts/<int:pk>/like/', AddLike.as_view()),
     path('posts/<int:pk>/dislike/', AddDislike.as_view()),
+    path('inbox/', ThreadModelList.as_view()),
+    path('inbox/<int:pk>/', ThreadModelDetail.as_view()),
     
     # path('posts/<int:post_pk>/comment/<int:pk>/like/', AddCommentLike.as_view(), name='comment-like'),
     # path('posts/<int:post_pk>/comment/<int:pk>/dislike/', AddCommentDislike.as_view(), name='comment-dislike'),
@@ -24,9 +26,7 @@ urlpatterns = [
     # path('notification/<int:notification_pk>/profile/<int:profile_pk>/', FollowNotification.as_view(), name='follow-notification'),
     # path('notification/<int:notification_pk>/thread/<int:object_pk>/', ThreadNotification.as_view(), name='thread-notification'),
     # path('notification/delete/<int:notification_pk>/', RemoveNotification.as_view(), name='notification-delete'),
-    # path('inbox/', ListThreads.as_view(), name='inbox'),
     # path('inbox/create-thread/', CreateThread.as_view(), name='create-thread'),
-    # path('inbox/<int:pk>/', ThreadView.as_view(), name='thread'),
     # path('inbox/<int:pk>/create-message', CreateMessage.as_view(), name='create-message'),
     
 ]

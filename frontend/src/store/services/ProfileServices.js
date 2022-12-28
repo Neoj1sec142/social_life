@@ -32,3 +32,10 @@ export const UpdateProfile = async (id, profile) => {
       } catch (err) {throw err}
 }
 
+export const GetFollowers = async (id) => {
+    try{
+        const res = Client.get(`profiles/${id}/followers/`)
+        console.log(res, "User Profile RES")
+        return res
+    }catch(err){throw err}
+}

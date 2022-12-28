@@ -30,15 +30,12 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    # user = serializers.PrimaryKeyRelatedField(
-    #     queryset=User.objects.all(),
-    #     # source='user'
-    # )
+    
     user = UserSerializer(many=False, read_only=True,)
-    # followers = serializers.PrimaryKeyRelatedField(
-    #     queryset=User.objects.all(),
-    #     # source='followers'
-    # )
+    followers = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        # source='followers'
+    )
     class Meta:
         model = UserProfile
         fields = '__all__'
@@ -54,3 +51,4 @@ class UserProfileSerializer(serializers.ModelSerializer):
 #         model = User
 #         fields = "__all__"
 #         extra_fields = ('posts', 'bookings', 'profile')
+

@@ -65,7 +65,7 @@ const Navbar = ({isAuthenticated, userProfiles, load_user_profiles}) => {
               <li className="nav-item dropdown" >
                   <ul className="list-group" hidden={!requested}>
                      {results ? results.map((item, index) => (
-                    <li key={index}><a className="list-group-item" href="!#">{item.name}&nbsp;&nbsp;{item.location}&nbsp; something &nbsp; something </a></li>)) : null}
+                    <li key={index}><a className="list-group-item" href={`/profile/${item.user.id}`}>{item.name}&nbsp;&nbsp;{item.location}&nbsp; something &nbsp; something </a></li>)) : null}
                   </ul>
                 </li>
             </div>

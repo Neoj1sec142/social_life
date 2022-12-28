@@ -103,54 +103,41 @@ class AddDislike(APIView):
 
 # class AddCommentLike(APIView):
 # class AddCommentDislike(APIView):
-
-# ProfileView
-# ProfileEditView
-
-        
-# class UpdateUserProfileView(UpdateAPIView):
-#      def put(self, request, *args, **kwargs):
-#         try:
-#             data = self.request.data
-#             with open('../TextStonch.txt', 'w') as f:
-#                 f.write(f'Data : {data} \n Request Data: {request.data}')
-#             name = data['name']
-#             user = data['user']
-#             bio = data['bio']
-#             birth_date = data['birth_date']
-#             location = data['location']
-#             picture = data['picture']
-#             UserProfile.objects.filter(user=user).update(
-#                 name=name, bio=bio, birth_date=birth_date,
-#                 location=location, picture=picture)
-#             user_profile = UserProfile.objects.get(user=user)
-#             user_profile = UserProfileSerializer(user_profile)
-#             profile = user_profile.save()
-#             if user_profile:
-#                 return Response({'data': user_profile, 'success': 'Successful Update', 'status': 200})
-#             else:
-#                 return Response({'data': profile, 'error': 'Error Updating', 'status': 205})
-#         except:
-#             return Response({'error': 'Error updating profile'})
-        
         
 # AddFollower
 # RemoveFollower
-class ListFollowers(APIView):
-    def get(self, request, pk, *args, **kwargs):
-        profile = UserProfile.objects.get(pk=pk)
-        followers = profile.followers.all()
-        context = {
-            'profile':profile,
-            'followers':followers,
-        }
-        return Response(request, context)
+
 # UserSearch
 # PostNotification
 # FollowNotification
 # ThreadNotification
 # RemoveNotification
 # ListThreads
-# CreateThread
-# ThreadView
-# CreateMessage
+class ThreadModelList(generics.ListCreateAPIView):
+    permission_classes = (permissions.AllowAny, )
+    serializer_class = ThreadModelSerializer
+    
+    class Meta:
+        model = ThreadModel
+        fields = ('__all__')
+        ordering = ('-date_created')
+
+
+class ThreadModelDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ThreadModel.objects.all()
+    serializer_class = ThreadModelSerializer
+    permission_classes = (permissions.AllowAny,)
+class MessageList(generics.ListCreateAPIView):
+    permission_classes = (permissions.AllowAny, )
+    serializer_class = MessageSerializer
+    
+    class Meta:
+        model = Message
+        fields = ('__all__')
+        ordering = ('-date_created')
+
+
+class MessageDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    permission_classes = (permissions.AllowAny,)
