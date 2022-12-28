@@ -3,17 +3,17 @@ import { classSheet } from '../../styles/classSheet';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
-    load_user_profile_by_id, follow_user_profile, load_userinfo
+    load_user_profile_by_id, follow_user_profile
 } from '../../store/actions/userProfile'
 // NEED TO REFOCUS MY FOLLOWING ON THE NEW BACKEND FOLLOWING SYSTEM
 const ProfilePage = ({
-    load_user_profile_by_id, follow_user_profile, userProfile, userInfo,
-    current_user, load_userinfo
+    load_user_profile_by_id, follow_user_profile, userProfile,
+    current_user
 }) => {
     const {con, flexCtr, lst, lstI} = classSheet;
     // console.log(userProfile, "Profile User")
     const {id} = useParams()
-    useEffect(() => {load_userinfo()}, [])
+    
     useEffect(() => {if(id) load_user_profile_by_id(id)},[])
     const followUser = e => {
         e.preventDefault()
@@ -21,9 +21,9 @@ const ProfilePage = ({
             follow_user_profile(userProfile.user.id, current_user.id)
         }
     }
-    console.log(userInfo, "ALL Users")
+    
     if(userProfile && current_user){
-        const {bio, birth_date, date_created, followers, location, name, picture} = userProfile;
+        const {bio, birth_date, date_created, location, name, picture} = userProfile;
        
         return(
             <div className={`${con} top-0 mb-3`}>
@@ -60,7 +60,7 @@ const ProfilePage = ({
 const mapStateToProps = state => ({
     userProfile: state.userProfile.userProfile,
     current_user: state.auth.current_user,
-    userInfo: state.userProfile.userInfo
+    
 })
 
-export default connect(mapStateToProps, {load_user_profile_by_id, follow_user_profile, load_userinfo})(ProfilePage)
+export default connect(mapStateToProps, {load_user_profile_by_id, follow_user_profile})(ProfilePage)

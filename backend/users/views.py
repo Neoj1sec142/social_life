@@ -72,7 +72,7 @@ class UserFollowingList(generics.ListCreateAPIView):
     serializer_class = UserFollowingSerializer
     permission_classes = (permissions.AllowAny,)
    
-class UserFollowingDetail(generics.RetrieveUpdateDestroyAPIView):
+class UserFollowingDetail(generics.ListCreateAPIView):
     serializer_class = UserFollowingSerializer
     permission_classes = (permissions.AllowAny, )
     def get_queryset(self):
@@ -80,7 +80,10 @@ class UserFollowingDetail(generics.RetrieveUpdateDestroyAPIView):
         queryset = UserFollowing.objects.filter(user_id=user)
         return queryset
         
-             
+class UnfollowView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserFollowing.objects.all()
+    serializer_class = UserFollowingSerializer
+    permission_classes = (permissions.AllowAny, )           
     # permission_classes = (permissions.AllowAny,)
     # def get_queryset(self, pk, *args, **kwargs):
     #     profile = UserProfile.objects.get(pk=pk)

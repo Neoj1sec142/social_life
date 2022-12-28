@@ -1,10 +1,11 @@
-import {GetProfiles, GetProfileDetail, UpdateProfile, FollowUser} from '../services/ProfileServices'
+import {GetProfiles, GetProfileDetail, UpdateProfile, FollowUser, UnfollowUser} from '../services/ProfileServices'
 import { GetUsers } from '../services/UserServices'
 import {
     LOAD_USERPROFILES_SUCCESS, LOAD_USERPROFILES_FAIL, 
     LOAD_USERPROFILE_SUCCESS, LOAD_USERPROFILE_FAIL, 
     USERPROFILE_UPDATE_SUCCESS, USERPROFILE_UPDATE_FAIL, 
     FOLLOW_USERPROFILE_SUCCESS, FOLLOW_USERPROFILE_FAIL,
+    UNFOLLOW_USERPROFILE_SUCCESS, UNFOLLOW_USERPROFILE_FAIL,
     LOAD_USERINFO_SUCCESS, LOAD_USERINFO_FAIL
 } from '../types'
 import { setAlert } from './alert'
@@ -69,6 +70,26 @@ export const update_user_profile = (id, profile) => async dispatch => {
         dispatch(setAlert(err, 'error'))
     }    
 }
+export const load_userinfo = () => async dispatch => {
+    try{
+        const res = await GetUsers()
+        if(res.status === 200){
+            dispatch({
+                type: LOAD_USERINFO_SUCCESS,
+                payload: res.data
+            })
+        }else{
+            dispatch({
+                type: LOAD_USERINFO_FAIL
+            })
+        }
+    }catch(err){
+        dispatch({
+            type: LOAD_USERINFO_FAIL
+        })
+    }
+}
+
 
 // export const load_followers = () => async dispatch => {}
 export const follow_user_profile = (id, follower_id) => async dispatch => {
@@ -91,24 +112,24 @@ export const follow_user_profile = (id, follower_id) => async dispatch => {
         dispatch(setAlert(err, 'error'))
     }
 }
-
-
-export const load_userinfo = () => async dispatch => {
+export const unfollow_user_profile = (id) => async dispatch => {
     try{
-        const res = await GetUsers()
-        if(res.status === 200){
+        const res = await UnfollowUser(id)
+        if(res.status === 204 || res.statusText === 'Not Found'){
             dispatch({
-                type: LOAD_USERINFO_SUCCESS,
-                payload: res.data
+                type: UNFOLLOW_USERPROFILE_SUCCESS
             })
         }else{
             dispatch({
-                type: LOAD_USERINFO_FAIL
+                type: UNFOLLOW_USERPROFILE_FAIL
             })
+            dispatch(setAlert('Error UnFollowing User', 'error'))
         }
     }catch(err){
         dispatch({
-            type: LOAD_USERINFO_FAIL
+            type: UNFOLLOW_USERPROFILE_FAIL
         })
+        dispatch(setAlert(err, 'error'))
     }
 }
+

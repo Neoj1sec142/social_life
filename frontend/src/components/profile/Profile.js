@@ -11,7 +11,7 @@ const Profile = ({load_user_profile_by_id, userProfile, current_user}) => {
   useEffect(() => {if(current_user) load_user_profile_by_id(current_user.id)},[])
   const {setDashboard} = useStateContext()
   if(userProfile){
-    const {bio, birth_date, date_created, followers, location, name, picture} = userProfile;
+    const {bio, birth_date, date_created, location, name, picture} = userProfile;
     if(bio !== '' && location !== '' && name !== ''){
       return(
         <div className={`${con} top-0 mb-3`}>

@@ -32,17 +32,36 @@ export const UpdateProfile = async (id, profile) => {
       } catch (err) {throw err}
 }
 
-export const GetFollowers = async (id) => {
-    try{
-        const res = Client.get(`profiles/${id}/followers/`)
-        console.log(res, "User Profile RES")
-        return res
-    }catch(err){throw err}
-}
+
 
 export const FollowUser = async (id, follower_id) => {
     try{
-        const res = Client.put(`profiles/${id}/follow/${follower_id}/`)
+        const data = {
+            user_id: id,
+            following_user_id: follower_id
+        }
+        const res = Client.post(`followers/`, data)
+        console.log(res, "Follow User Res")
+        return res
+    }catch(err){throw err}
+}
+export const UnfollowUser = async (id) => {
+    try{
+        const res = Client.delete(`followers/${id}/unfollow/`)
+        console.log(res, "Follow User Res")
+        return res
+    }catch(err){throw err}
+}
+export const GetUserFollowing = async (id) => {
+    try{
+        const res = Client.get(`followers/${id}/`)
+        console.log(res, "Follow User Res")
+        return res
+    }catch(err){throw err}
+}
+export const GetAllFollowings = async () => {
+    try{
+        const res = Client.get(`followers/`)
         console.log(res, "Follow User Res")
         return res
     }catch(err){throw err}
