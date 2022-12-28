@@ -40,29 +40,29 @@ export const FollowUser = async (id, follower_id) => {
             user_id: id,
             following_user_id: follower_id
         }
-        const res = Client.post(`followers/`, data)
+        const res = await Client.post(`following/`, data)
         console.log(res, "Follow User Res")
         return res
     }catch(err){throw err}
 }
 export const UnfollowUser = async (id) => {
     try{
-        const res = Client.delete(`followers/${id}/unfollow/`)
-        console.log(res, "Follow User Res")
+        const res = await Client.delete(`following/${id}/unfollow/`)
+        console.log(res, "UnFollow User Res")
         return res
     }catch(err){throw err}
 }
 export const GetUserFollowing = async (id) => {
     try{
-        const res = Client.get(`followers/${id}/`)
-        console.log(res, "Follow User Res")
+        const res = await Client.get(`following/${id}/`)
+        console.log(res, "Get UserFollowing Res")
         return res
     }catch(err){throw err}
 }
 export const GetAllFollowings = async () => {
     try{
-        const res = Client.get(`followers/`)
-        console.log(res, "Follow User Res")
+        const res = await Client.get(`following/`)
+        console.log(res, "Get All Followers Res")
         return res
     }catch(err){throw err}
 }

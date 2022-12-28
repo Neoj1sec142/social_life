@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, UserProfile
+from .models import User, UserProfile, UserFollowing
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
         extra_kwargs = {'write_only': True}
-        extra_fields = ('posts')
+        extra_fields = ('posts',)
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         instance = self.Meta.model(**validated_data)
@@ -36,7 +36,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = '__all__'
-        read_only_fields = ('user')
+        read_only_fields = ('user',)
         ordering = ('-date_created')
 
 
@@ -51,9 +51,9 @@ class UserFollowingSerializer(serializers.ModelSerializer):
         many=False
     )
     class Meta:
-        model = UserProfile
+        model = UserFollowing
         fields = '__all__'
-        read_only_fields = ('user', 'followers')
+        # read_only_fields = ['user',]
         ordering = ('-date_created')
 
 # class UserAllDetailsSerializer(serializers.ModelSerializer):

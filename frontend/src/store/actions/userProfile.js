@@ -1,4 +1,4 @@
-import {GetProfiles, GetProfileDetail, UpdateProfile, FollowUser, UnfollowUser} from '../services/ProfileServices'
+import {GetProfiles, GetProfileDetail, UpdateProfile, FollowUser, UnfollowUser, GetUserFollowing, GetAllFollowings} from '../services/ProfileServices'
 import { GetUsers } from '../services/UserServices'
 import {
     LOAD_USERPROFILES_SUCCESS, LOAD_USERPROFILES_FAIL, 
@@ -6,6 +6,8 @@ import {
     USERPROFILE_UPDATE_SUCCESS, USERPROFILE_UPDATE_FAIL, 
     FOLLOW_USERPROFILE_SUCCESS, FOLLOW_USERPROFILE_FAIL,
     UNFOLLOW_USERPROFILE_SUCCESS, UNFOLLOW_USERPROFILE_FAIL,
+    LOAD_ALL_FOLLOWERS_SUCCESS, LOAD_ALL_FOLLOWERS_FAIL,
+    LOAD_USER_FOLLOWERS_SUCCESS, LOAD_USER_FOLLOWERS_FAIL,
     LOAD_USERINFO_SUCCESS, LOAD_USERINFO_FAIL
 } from '../types'
 import { setAlert } from './alert'
@@ -92,10 +94,10 @@ export const load_userinfo = () => async dispatch => {
 
 
 // export const load_followers = () => async dispatch => {}
-export const follow_user_profile = (id, follower_id) => async dispatch => {
+export const follow_user = (id, follower_id) => async dispatch => {
     try{
         const res = await FollowUser(id, follower_id)
-        if(res.status === 200 || res.statusText === 'Followed'){
+        if(res.status === 200 || res.statusText === 'Created'){
             dispatch({
                 type: FOLLOW_USERPROFILE_SUCCESS
             })
@@ -112,7 +114,7 @@ export const follow_user_profile = (id, follower_id) => async dispatch => {
         dispatch(setAlert(err, 'error'))
     }
 }
-export const unfollow_user_profile = (id) => async dispatch => {
+export const unfollow_user = (id) => async dispatch => {
     try{
         const res = await UnfollowUser(id)
         if(res.status === 204 || res.statusText === 'Not Found'){
@@ -133,3 +135,42 @@ export const unfollow_user_profile = (id) => async dispatch => {
     }
 }
 
+export const load_user_following = (id) => async dispatch => {
+    try{
+        const res = await GetUserFollowing(id)
+        if(res.status === 200){
+            dispatch({
+                type: LOAD_USER_FOLLOWERS_SUCCESS,
+                payload: res.data
+            })
+        }else{
+            dispatch({
+                type: LOAD_USER_FOLLOWERS_FAIL
+            })
+        }
+    }catch(err){
+        dispatch({
+            type: LOAD_USER_FOLLOWERS_FAIL
+        })
+    }
+}
+
+export const load_all_followings = () => async dispatch => {
+    try{
+        const res = await GetAllFollowings()
+        if(res.status === 200){
+            dispatch({
+                type: LOAD_ALL_FOLLOWERS_SUCCESS,
+                payload: res.data
+            })
+        }else{
+            dispatch({
+                type: LOAD_ALL_FOLLOWERS_FAIL
+            })
+        }
+    }catch(err){
+        dispatch({
+            type: LOAD_ALL_FOLLOWERS_FAIL
+        })
+    }
+}
