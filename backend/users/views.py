@@ -4,8 +4,8 @@ from rest_framework.response import Response
 # from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import User, UserProfile
-from .serializers import UserSerializer, UserDetailSerializer, UserProfileSerializer#, UserAllDetailsSerializer
+from .models import User, UserProfile, UserFollowing
+from .serializers import UserSerializer, UserDetailSerializer, UserProfileSerializer, UserFollowingSerializer
 
 class UserList(generics.ListCreateAPIView):
   permission_classes = (permissions.AllowAny,)
@@ -67,33 +67,28 @@ class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserProfileSerializer
     permission_classes = (permissions.AllowAny, )
     
-    
-class ListFollowers(generics.ListCreateAPIView):
-    serializer_class = UserProfileSerializer
-    # model = serializer_class.Meta.model
-    # queryset = UserProfile.objects.get(pk=pk).followers.all()
+class UserFollowingList(generics.ListCreateAPIView):
+    queryset = UserFollowing.objects.filter()
+    serializer_class = UserFollowingSerializer
     permission_classes = (permissions.AllowAny,)
-    def get_queryset(self, pk, *args, **kwargs):
-        profile = UserProfile.objects.get(pk=pk)
-        queryset = profile.followers.all()
+   
+class UserFollowingDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = UserFollowingSerializer
+    permission_classes = (permissions.AllowAny, )
+    def get_queryset(self):
+        user = self.kwargs['pk']
+        queryset = UserFollowing.objects.filter(user_id=user)
         return queryset
-    
-    class Meta:
-        model = UserProfile
-        fields = ('followers')
-        lookup_field = 'pk'
         
-class FollowUserView(APIView):
-    def put(self, request, pk, user_pk, *args, **kwargs):
-        profile = UserProfile.objects.get(pk=pk)
-        followers = profile.followers.all()
-        user = User.objects.get(pk=user_pk)
-        for follower in followers:
-            if user == follower:
-                profile.followers.remove(user)
-                profile.save()
-                return Response(request, {'status': 200, 'statusText':'Unfollowed'})
-        profile.followers.add(user)
-        profile.save()
-        return Response(request, {'status': 200, "statusText": 'Followed'})
+             
+    # permission_classes = (permissions.AllowAny,)
+    # def get_queryset(self, pk, *args, **kwargs):
+    #     profile = UserProfile.objects.get(pk=pk)
+    #     queryset = profile.followers.all()
+    #     return queryset
+    # def get_queryset(self):
+    #     follwed_id = self.kwargs['pk']
+    #     profile = UserProfile.objects.filter(user_id=follwed_id)
+    #     queryset = profile.followers.all()
+    #     return queryset
     

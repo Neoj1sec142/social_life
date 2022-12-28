@@ -3,25 +3,28 @@ import { classSheet } from '../../styles/classSheet';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
-    load_user_profile_by_id, follow_user_profile
+    load_user_profile_by_id, follow_user_profile, load_userinfo
 } from '../../store/actions/userProfile'
-
+// NEED TO REFOCUS MY FOLLOWING ON THE NEW BACKEND FOLLOWING SYSTEM
 const ProfilePage = ({
-    load_user_profile_by_id, follow_user_profile, userProfile,
-    current_user
+    load_user_profile_by_id, follow_user_profile, userProfile, userInfo,
+    current_user, load_userinfo
 }) => {
     const {con, flexCtr, lst, lstI} = classSheet;
     // console.log(userProfile, "Profile User")
     const {id} = useParams()
+    useEffect(() => {load_userinfo()}, [])
     useEffect(() => {if(id) load_user_profile_by_id(id)},[])
     const followUser = e => {
         e.preventDefault()
         if(current_user.id !== undefined){
-            follow_user_profile(id, current_user.id)
+            follow_user_profile(userProfile.user.id, current_user.id)
         }
     }
-    if(userProfile){
+    console.log(userInfo, "ALL Users")
+    if(userProfile && current_user){
         const {bio, birth_date, date_created, followers, location, name, picture} = userProfile;
+       
         return(
             <div className={`${con} top-0 mb-3`}>
             <div className={`${flexCtr} mb-3`}>
@@ -31,8 +34,9 @@ const ProfilePage = ({
                 <p className='fs-4 ms-2'>Location: {location}</p>
                 {/* <p className='m-2 p-3'>Followers: {followers !== [] ? followers.Length : '0'}</p> */}
                 <p className='m-2 p-3'><strong>About Me:</strong><br /> {bio}</p>
-                {current_user.id === id 
-                ? <button onClick={e=>followUser(e)} className='btn btn-primary m-2'>Follow</button> : <button>To Dashboard</button>}
+                {current_user.id && userProfile.user ? (
+                current_user.id === userProfile.user.id 
+                ? <button onClick={e=>followUser(e)} className='btn btn-primary m-2'>Follow</button> : <button>To Dashboard</button>) : null}
                 </div>
             </div>
             <div className='card m-3 p-3'>
@@ -55,7 +59,8 @@ const ProfilePage = ({
 
 const mapStateToProps = state => ({
     userProfile: state.userProfile.userProfile,
-    current_user: state.auth.current_user
+    current_user: state.auth.current_user,
+    userInfo: state.userProfile.userInfo
 })
 
-export default connect(mapStateToProps, {load_user_profile_by_id, follow_user_profile})(ProfilePage)
+export default connect(mapStateToProps, {load_user_profile_by_id, follow_user_profile, load_userinfo})(ProfilePage)

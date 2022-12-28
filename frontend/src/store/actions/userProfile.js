@@ -1,9 +1,11 @@
 import {GetProfiles, GetProfileDetail, UpdateProfile, FollowUser} from '../services/ProfileServices'
+import { GetUsers } from '../services/UserServices'
 import {
     LOAD_USERPROFILES_SUCCESS, LOAD_USERPROFILES_FAIL, 
     LOAD_USERPROFILE_SUCCESS, LOAD_USERPROFILE_FAIL, 
     USERPROFILE_UPDATE_SUCCESS, USERPROFILE_UPDATE_FAIL, 
-    FOLLOW_USERPROFILE_SUCCESS, FOLLOW_USERPROFILE_FAIL
+    FOLLOW_USERPROFILE_SUCCESS, FOLLOW_USERPROFILE_FAIL,
+    LOAD_USERINFO_SUCCESS, LOAD_USERINFO_FAIL
 } from '../types'
 import { setAlert } from './alert'
 
@@ -87,5 +89,26 @@ export const follow_user_profile = (id, follower_id) => async dispatch => {
             type: FOLLOW_USERPROFILE_FAIL
         })
         dispatch(setAlert(err, 'error'))
+    }
+}
+
+
+export const load_userinfo = () => async dispatch => {
+    try{
+        const res = await GetUsers()
+        if(res.status === 200){
+            dispatch({
+                type: LOAD_USERINFO_SUCCESS,
+                payload: res.data
+            })
+        }else{
+            dispatch({
+                type: LOAD_USERINFO_FAIL
+            })
+        }
+    }catch(err){
+        dispatch({
+            type: LOAD_USERINFO_FAIL
+        })
     }
 }

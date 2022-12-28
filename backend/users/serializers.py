@@ -32,10 +32,23 @@ class UserDetailSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     
     user = UserSerializer(many=False, read_only=True,)
-    followers = serializers.PrimaryKeyRelatedField(
+    
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+        read_only_fields = ('user')
+        ordering = ('-date_created')
+
+
+class UserFollowingSerializer(serializers.ModelSerializer):
+    user_id = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
-        many=True
-        # source='followers'
+        many=False,
+        source='pk'
+    )
+    following_user_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        many=False
     )
     class Meta:
         model = UserProfile
