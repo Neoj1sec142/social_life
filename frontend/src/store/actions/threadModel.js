@@ -27,7 +27,76 @@ export const load_threads = () => async dispatch => {
         })
     }
 }
-export const load_thread_by_id = (id) => async dispatch => {}
-export const upload_thread = (thread) => async dispatch => {}
-export const update_thread = (id, threadDetails) => async dispatch => {}
-export const destroy_threads = (id) => async dispatch => {}
+export const load_thread_by_id = (id) => async dispatch => {
+    try{
+        const res = await GetThreadById(id)
+        if(res.status === 200){
+            dispatch({
+                type: LOAD_THREAD_SUCCESS,
+                payload: res.data
+            })
+        }else{
+            dispatch({
+                type: LOAD_THREAD_FAIL
+            })
+        }
+    }catch(err){
+        dispatch({
+            type: LOAD_THREAD_FAIL
+        })
+    }
+}
+export const upload_thread = (thread) => async dispatch => {
+    try{
+        const res = await CreateThread(thread)
+        if(res.status === 201 || res.statusText === 'Created'){
+            dispatch({
+                type: CREATE_THREAD_SUCCESS
+            })
+        }else{
+            dispatch({
+                type: CREATE_THREAD_FAIL
+            })
+        }
+    }catch(err){
+        dispatch({
+            type: CREATE_THREAD_FAIL
+        })
+    }
+}
+export const update_thread = (id, threadDetails) => async dispatch => {
+    try{
+        const res = await UpdateThread(id, threadDetails)
+        if(res.status === 200 || res.statusText === 'Created'){
+            dispatch({
+                type: UPDATE_THREAD_SUCCESS
+            })
+        }else{
+            dispatch({
+                type: UPDATE_THREAD_FAIL
+            })
+        }
+    }catch(err){
+        dispatch({
+            type: UPDATE_THREAD_FAIL
+        })
+    }
+}
+export const destroy_threads = (id) => async dispatch => {
+    try{
+        const res = await RemoveThread(id)
+        if(res.status === 204 || res.statusText === 'Not Found'){
+            dispatch({
+                type: DELETE_THREAD_SUCCESS
+            })
+        }else{
+            dispatch({
+                type: DELETE_THREAD_FAIL
+            })
+        }
+    }catch(err){
+        dispatch({
+            type: DELETE_THREAD_FAIL
+        })
+    }
+}

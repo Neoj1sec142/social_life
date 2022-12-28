@@ -7,8 +7,9 @@ import Dashboard from './containers/Dashboard';
 import Logout from './components/base/Logout';
 import FeedPage from './containers/FeedPage';
 import PostDetail from './containers/details/PostDetail';
-import './styles/App.css';
 import ProfilePage from './components/profile/ProfilePage';
+import InboxPage from './containers/InboxPage';
+import './styles/App.css';
 // import ProfileForm from './components/forms/ProfileForm';
 
 const App = ({isAuthenticated}) => {
@@ -24,6 +25,7 @@ const App = ({isAuthenticated}) => {
           <Route path='/dashboard' element={isAuthenticated ? <Dashboard /> : <AuthPage />} />
           <Route path='/feed' element={isAuthenticated ? <FeedPage /> : <AuthPage />}/> 
           <Route path='/profile/:id' element={isAuthenticated ? <ProfilePage /> : <AuthPage />}/> 
+          <Route path='/inbox' element={isAuthenticated ? <InboxPage /> : <AuthPage />}/> 
           <Route path='/post/:id' element={isAuthenticated ? <PostDetail /> : <AuthPage />}/> 
         </Routes>
       </Layout>
