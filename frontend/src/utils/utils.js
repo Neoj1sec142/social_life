@@ -3,5 +3,5 @@ export const isEmpty = (array) => {
 }
 
 export const isFollowing = (current_id, followingList) => {
-
+    
 }
