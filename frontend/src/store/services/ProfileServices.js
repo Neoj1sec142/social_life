@@ -39,3 +39,11 @@ export const GetFollowers = async (id) => {
         return res
     }catch(err){throw err}
 }
+
+export const FollowUser = async (id, follower_id) => {
+    try{
+        const res = Client.put(`profiles/${id}/follow/${follower_id}/`)
+        console.log(res, "Follow User Res")
+        return res
+    }catch(err){throw err}
+}

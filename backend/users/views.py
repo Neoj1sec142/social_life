@@ -80,6 +80,20 @@ class ListFollowers(generics.ListCreateAPIView):
     
     class Meta:
         model = UserProfile
-        fields = ('__all__')
+        fields = ('followers')
         lookup_field = 'pk'
-        ordering = ('-date_created')
+        
+class FollowUserView(APIView):
+    def put(self, request, pk, user_pk, *args, **kwargs):
+        profile = UserProfile.objects.get(pk=pk)
+        followers = profile.followers.all()
+        user = User.objects.get(pk=user_pk)
+        for follower in followers:
+            if user == follower:
+                profile.followers.remove(user)
+                profile.save()
+                return Response(request, {'status': 200, 'statusText':'Unfollowed'})
+        profile.followers.add(user)
+        profile.save()
+        return Response(request, {'status': 200, "statusText": 'Followed'})
+    

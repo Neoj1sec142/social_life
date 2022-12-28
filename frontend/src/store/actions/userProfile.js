@@ -1,10 +1,9 @@
-import {GetProfiles, GetProfileDetail, UpdateProfile} from '../services/ProfileServices'
+import {GetProfiles, GetProfileDetail, UpdateProfile, FollowUser} from '../services/ProfileServices'
 import {
     LOAD_USERPROFILES_SUCCESS, LOAD_USERPROFILES_FAIL, 
     LOAD_USERPROFILE_SUCCESS, LOAD_USERPROFILE_FAIL, 
     USERPROFILE_UPDATE_SUCCESS, USERPROFILE_UPDATE_FAIL, 
-    // FOLLOW_USERPROFILE_SUCCESS, FOLLOW_USERPROFILE_FAIL, 
-    // UNFOLLOW_USERPROFILE_SUCCESS, UNFOLLOW_USERPROFILE_FAIL
+    FOLLOW_USERPROFILE_SUCCESS, FOLLOW_USERPROFILE_FAIL
 } from '../types'
 import { setAlert } from './alert'
 
@@ -70,5 +69,23 @@ export const update_user_profile = (id, profile) => async dispatch => {
 }
 
 // export const load_followers = () => async dispatch => {}
-// export const follow_user_profile = () => async dispatch => {}
-// export const unfollow_user_profile = () => async dispatch => {}
+export const follow_user_profile = (id, follower_id) => async dispatch => {
+    try{
+        const res = await FollowUser(id, follower_id)
+        if(res.status === 200 || res.statusText === 'Followed'){
+            dispatch({
+                type: FOLLOW_USERPROFILE_SUCCESS
+            })
+        }else{
+            dispatch({
+                type: FOLLOW_USERPROFILE_FAIL
+            })
+            dispatch(setAlert('Error Following User', 'error'))
+        }
+    }catch(err){
+        dispatch({
+            type: FOLLOW_USERPROFILE_FAIL
+        })
+        dispatch(setAlert(err, 'error'))
+    }
+}

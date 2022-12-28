@@ -15,7 +15,7 @@ class UserProfile(models.Model):
     birth_date = models.CharField(blank=True, null=True, max_length=50)
     location = models.CharField(max_length=100, blank=True, null=True)
     picture = models.ImageField(upload_to='uploads/profile_pictures', default='uploads/profile_pictures/default.jpg', blank=True)
-    followers = models.ManyToManyField(User, blank=True, related_name='followers')
+    followers = models.ManyToManyField(User, blank=True, related_name='followers', null=True)
     date_created = models.DateTimeField(auto_now=True, null=True, blank=True)
     date_modified = models.DateTimeField(auto_now=True, null=True, blank=True)
     
@@ -26,3 +26,4 @@ def create_user_profile(sender, instance, created,  **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+    

@@ -18,5 +18,6 @@ urlpatterns = [
     path('profiles/', UserProfileList.as_view()),
     path('profiles/<int:pk>/', UserProfileDetail.as_view()),
     path('profiles/<int:pk>/followers/', ListFollowers.as_view()),
+    path('profiles/<int:pk>/follow/<int:user_pk>/', FollowUserView.as_view()),
     # path('profile/update/<int:pk>/', UpdateUserProfileView.as_view()),
 ]

@@ -34,6 +34,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False, read_only=True,)
     followers = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
+        many=True
         # source='followers'
     )
     class Meta:
