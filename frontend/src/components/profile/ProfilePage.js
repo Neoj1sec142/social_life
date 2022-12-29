@@ -14,7 +14,8 @@ const ProfilePage = ({
 }) => {
     const {con, flexCtr, lst, lstI} = classSheet;
     const {id} = useParams()
-    const [followerIds, setFollowerIds] = ([])
+    const [following, setFollowing] = useState(false)
+    const [followerId, setFollowerId] = useState({})
     useEffect(() => {if(id) load_user_profile_by_id(id)},[])
     useEffect(() => {
         if(id){
@@ -37,22 +38,32 @@ const ProfilePage = ({
     }
     const unfollowUser = e => {
         e.preventDefault()
-        unfollow_user(userProfile.user.id, current_user.id)
+        unfollow_user(followerId.id)
         setInterval(() => {}, 1000)
         return () => {
             clearInterval()
             window.location.reload(false)
         }
     }
+    
     useEffect(() => {
-        let res = []
+        let res = null;
+        // console.log(user_followers, '0')
         if(user_followers.length){
-            user_followers.forEach((item) => {
-                res.push(item)
-            })
+            console.log('1')
+            for(let i=0; i<user_followers.length; i++){
+                if(parseInt(current_user.id) === parseInt(user_followers[i].following_user)){
+                    res = user_followers[i]
+                    console.log(res, '2')
+                }
+            }
         }
-        setFollowerIds(res)
-    },[])
+        if(res !== null){ 
+            console.log('3')
+            setFollowerId(res)
+            setFollowing(true)
+        }
+    },[user_followers])
     if(userProfile.user && current_user.id && user_followers){
         // console.log(user_followers, "USER FOLLOWERS")
         // console.log(current_user, "Current User")
