@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { classSheet } from '../../styles/classSheet';
 import { connect } from 'react-redux';
-import { isFollowing } from '../../utils/utils';
 import { useParams } from 'react-router-dom';
 import {
     load_user_profile_by_id, follow_user, load_user_following,
@@ -13,8 +12,6 @@ const ProfilePage = ({
     userProfile, current_user, user_followers
 }) => {
     const {con, flexCtr, lst, lstI} = classSheet;
-    // console.log(userProfile, "Profile User")
-    const [reload, setReload] = useState(false)
     const {id} = useParams()
     const [following, setFollowing] = useState(false)
     useEffect(() => {if(id) load_user_profile_by_id(id)},[])
@@ -23,7 +20,7 @@ const ProfilePage = ({
             load_user_following(id)
         }
     }, [])
-    
+    // Still needs work determining if user is following or not
     useEffect(() => {
         if(user_followers.length){
             setFollowing(false)
@@ -44,8 +41,8 @@ const ProfilePage = ({
         follow_user(userProfile.user.id, current_user.id)
         setInterval(() => {}, 1000)
         return () => {
-            setReload(true)
             clearInterval()
+            window.location.reload(false)
         }
     }
     const unfollowUser = e => {
@@ -53,11 +50,11 @@ const ProfilePage = ({
         unfollow_user(userProfile.user.id, current_user.id)
         setInterval(() => {}, 1000)
         return () => {
-            setReload(true)
             clearInterval()
+            window.location.reload(false)
         }
     }
-    useEffect(() => {if(reload)window.location.reload(false)},[reload])
+    
     if(userProfile && current_user){
         console.log(user_followers, "USER FOLLOWERS")
         console.log(current_user, "Current User")
