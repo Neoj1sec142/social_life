@@ -77,7 +77,7 @@ class UserFollowingDetail(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny, )
     def get_queryset(self):
         user = self.kwargs['pk']
-        queryset = UserFollowing.objects.filter(user_id=user)
+        queryset = UserFollowing.objects.filter(user=user)
         return queryset
         
 class UnfollowView(generics.RetrieveUpdateDestroyAPIView):

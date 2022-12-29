@@ -3,8 +3,13 @@ export const isEmpty = (array) => {
 }
 
 export const isFollowing = (current_id, followers) => {
-    followers.foreach(item => { 
-        if(item.following_user === current_id){ return true }
-    })
-    return false
+    let res = false;
+    for(let i=0; i<followers.length; i++){
+        const user = parseInt(current_id)
+        const follower = followers[i].following_user
+        if(user === follower){
+            res = true
+        }
+    }
+    return res;
 }

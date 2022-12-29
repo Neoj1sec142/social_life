@@ -6,14 +6,15 @@ import {
     load_user_profile_by_id, follow_user, load_user_following,
     unfollow_user
 } from '../../store/actions/userProfile'
-// NEED TO REFOCUS MY FOLLOWING ON THE NEW BACKEND FOLLOWING SYSTEM
+import { isFollowing } from '../../utils/utils';
+
 const ProfilePage = ({
     load_user_profile_by_id, follow_user, load_user_following, unfollow_user,
     userProfile, current_user, user_followers
 }) => {
     const {con, flexCtr, lst, lstI} = classSheet;
     const {id} = useParams()
-    const [following, setFollowing] = useState(false)
+    const [followerIds, setFollowerIds] = ([])
     useEffect(() => {if(id) load_user_profile_by_id(id)},[])
     useEffect(() => {
         if(id){
@@ -21,24 +22,13 @@ const ProfilePage = ({
         }
     }, [])
     // Still needs work determining if user is following or not
-    useEffect(() => {
-        if(user_followers.length){
-            setFollowing(false)
-            let res = false
-            for(let i=0; i<user_followers.length; i++){
-                if(current_user.id === user_followers[i].following_user){
-                    res = true
-                }
-            }
-            if(res === true){
-                setFollowing(true)
-            }
-        }
-    },[user_followers])
-    console.log(user_followers, 'followers')
+    
+    
     const followUser = e => {
         e.preventDefault()
-        follow_user(userProfile.user.id, current_user.id)
+        const user = parseInt(userProfile.user.id)
+        const follower = parseInt(current_user.id)
+        follow_user(user, follower)
         setInterval(() => {}, 1000)
         return () => {
             clearInterval()
@@ -54,12 +44,21 @@ const ProfilePage = ({
             window.location.reload(false)
         }
     }
-    
-    if(userProfile && current_user){
-        console.log(user_followers, "USER FOLLOWERS")
-        console.log(current_user, "Current User")
+    useEffect(() => {
+        let res = []
+        if(user_followers.length){
+            user_followers.forEach((item) => {
+                res.push(item)
+            })
+        }
+        setFollowerIds(res)
+    },[])
+    if(userProfile.user && current_user.id && user_followers){
+        // console.log(user_followers, "USER FOLLOWERS")
+        // console.log(current_user, "Current User")
+        
         const {bio, birth_date, date_created, location, name, picture} = userProfile;
-       
+        
         return(
             <div className={`${con} top-0 mb-3`}>
             <div className={`${flexCtr} mb-3`}>
@@ -69,15 +68,13 @@ const ProfilePage = ({
                 <p className='fs-4 ms-2'>Location: {location}</p>
                 {/* <p className='m-2 p-3'>Followers: {followers !== [] ? followers.Length : '0'}</p> */}
                 <p className='m-2 p-3'><strong>About Me:</strong><br /> {bio}</p>
-                {current_user.id && userProfile.user ? (
-                    current_user.id === userProfile.user.id ? (
-                        <a className='btn btn-primary' href='/dashboard'>To Dashboard</a>
-                    ): null ) : null}
-                {current_user.id && userProfile.user ? (
-                    (current_user.id !== userProfile.user.id) && following
-                    ? <button onClick={e=>unfollowUser(e)} className='btn btn-primary m-2'>Unfollow</button>
-                    : <button onClick={e=>followUser(e)} className='btn btn-primary m-2'>Follow</button>
-                ) : null}
+                {current_user.id === userProfile.user.id ? (
+                    <a className='btn btn-primary' href='/dashboard'>To Dashboard</a>
+                ):(<button onClick={e=>{following ? 
+                        unfollowUser(e) : followUser(e)}} 
+                        className='btn btn-primary m-2'>{following ? "Unfollow" : "Follow"}</button>)
+                }
+                
                 </div>
             </div>
             <div className='card m-3 p-3'>
