@@ -22,6 +22,7 @@ const Register = ({signup, setPage}) => {
   const onSubmit = e => {
     e.preventDefault()
     signup(formData)
+    setPage(false)
   }
 
   return (

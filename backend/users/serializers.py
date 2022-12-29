@@ -41,14 +41,15 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class UserFollowingSerializer(serializers.ModelSerializer):
-    user_id = serializers.PrimaryKeyRelatedField(
+    user = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
         many=False,
-        source='pk'
+        # source='pk'
     )
-    following_user_id = serializers.PrimaryKeyRelatedField(
+    following_user = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
-        many=False
+        many=False,
+        # source='user'
     )
     class Meta:
         model = UserFollowing

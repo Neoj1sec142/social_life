@@ -98,17 +98,23 @@ export const signup = ({first_name, last_name, email, username, password}) => as
         password})
     try{
         const res = await axios.post('http://localhost:8000/users/create/', body, config)
-        // if(res.status == 200){}else{}
+        if(res.status == 201 || res.statusText === 'Created'){
         dispatch({
             type: SIGNUP_SUCCESS,
             payload: res.data
         })
-        dispatch(login(email, password))
+        dispatch(setAlert('Account Created Successfully', 'success'))
+        }else{
+            dispatch({
+                type: SIGNUP_FAIL,
+            })
+            dispatch(setAlert('Error creating account', 'error'))    
+        }
     }catch(err){
         dispatch({
             type: SIGNUP_FAIL,
         })
-        dispatch(setAlert('Error creating account', 'error'))
+        dispatch(setAlert(err, 'error'))
     }
 }
 

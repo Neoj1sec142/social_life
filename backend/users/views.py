@@ -68,7 +68,7 @@ class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.AllowAny, )
     
 class UserFollowingList(generics.ListCreateAPIView):
-    queryset = UserFollowing.objects.filter()
+    queryset = UserFollowing.objects.all()
     serializer_class = UserFollowingSerializer
     permission_classes = (permissions.AllowAny,)
    

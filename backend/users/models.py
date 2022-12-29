@@ -28,6 +28,8 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
     
 class UserFollowing(models.Model):
-    user_id = models.ForeignKey("User", on_delete=models.CASCADE, related_name="following")
-    following_user_id = models.ForeignKey("User", on_delete=models.CASCADE, related_name="followers")
+    user = models.OneToOneField("User", on_delete=models.CASCADE, related_name="following", unique=True)
+    following_user = models.OneToOneField("User", on_delete=models.CASCADE, related_name="followers", unique=True)
     date_created = models.DateTimeField(auto_now=True, null=True, blank=True)
+    def __str__(self):
+        return self.following_user

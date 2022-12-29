@@ -29,7 +29,7 @@ const AuthPage = ({isAuthenticated}) => {
           </div>
         </div> 
       </div>) : (
-        page === true ? <Register setPage={setPage}/> : <Login setPage={setPage}/>
+        page ? <Register setPage={setPage}/> : <Login setPage={setPage}/>
       )}
     </div>
   )
