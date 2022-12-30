@@ -6,7 +6,7 @@ const gridUserProfile = (props) => (
         src={props.EmployeeImage}
         alt="employee"
       /> */}
-      <a href={`profile/${props.id}/`}>
+      <a href={`new-thread/${props.id}/`}>
         <p className="mt-1">{props.username}</p>
       </a>
   </div>

@@ -8,9 +8,7 @@ const InboxList = ({
 }) => {
   const {con, flexCtr, lst, lstI} = classSheet;
   
-  useEffect(() => {
-    if(current_user){setFormData({...formData, user: current_user.id})}
-  },[])
+  
   useEffect(() => load_threads(),[])
   
   console.log(threadModels, "threads")
@@ -30,11 +28,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {load_threads, upload_thread})(InboxList)
-  // For Message Form
-  // const [formData, setFormData] = useState({
-  //   thread: '',
-  //   sender_user: '',
-  //   reciever_user: '',
-  //   body: '',
-  //   image: ''
-  // })

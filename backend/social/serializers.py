@@ -39,11 +39,11 @@ class CommentSerializer(serializers.ModelSerializer):
 class ThreadModelSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
-        source='self'
+        # source='self'
     )
     reciever = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
-        source='user'
+        # source='user'
     )
     
     class Meta:
@@ -56,15 +56,15 @@ class ThreadModelSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     sender_user = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
-        source='self'
+        
     )
     reciever_user = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
-        source='user'
+        
     )
     thread = serializers.PrimaryKeyRelatedField(
         queryset=ThreadModel.objects.all(),
-        # source='post'
+        
     )
     class Meta:
         model = Message

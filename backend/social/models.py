@@ -54,4 +54,4 @@ class Message(models.Model):
     image = models.ImageField(upload_to='uploads/message_photos', blank=True, null=True)
     date_created = models.DateTimeField(auto_now=True, null=True, blank=True)
     date_modified = models.DateTimeField(auto_now=True, null=True, blank=True)
-    is_read = models.BooleanField(default=False)
+    is_read = models.BooleanField(default=False, blank=True)

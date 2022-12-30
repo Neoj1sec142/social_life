@@ -2,7 +2,7 @@ import Client from "./api";
 // Message Services
 export const GetMessagesByThread = async (id) => {
     try{
-        const res = await Client.get(`inbox/${id}/messages/`)
+        const res = await Client.get(`social/inbox/${id}/messages/`)
         console.log(res, "MSG RES")
         return res
     }catch(err){console.log(err)}
@@ -20,21 +20,20 @@ export const SendMessage = async (msg) => {
     try {
         const data = {
             body: msg.body,
-            image: msg.image,
+            // image: msg.image,
             sender_user: msg.sender_user,
             reciever_user: msg.reciever_user,
-            thread: msg.thread,
-            is_read: msg.is_read
+            thread: msg.thread
         }
         console.log(data, "Before axios")
-        const res = await Client.post(`inbox/${data.thread}/messages/`, data)
+        const res = await Client.post(`social/messages/`, data)
         return res
     } catch (err) {console.log(err)}
 }
     
 export const RemoveMsg = async (id) => {
     try{
-        const res = await Client.delete(`messages/${id}/`)
+        const res = await Client.delete(`social/messages/${id}/`)
         return res
     } catch (err) {console.log(err)}
 }

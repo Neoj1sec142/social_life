@@ -9,6 +9,7 @@ import {
 const initialState = {
     threadModels: [],
     threadModel: {},
+    new_thread: {}
 }
 
 export default function(state = initialState, action){
@@ -25,6 +26,10 @@ export default function(state = initialState, action){
                 threadModels: payload
             }
         case CREATE_THREAD_SUCCESS:
+            return{
+                ...state,
+                new_thread: payload
+            }
         case DELETE_THREAD_SUCCESS:
         case LOAD_THREADS_FAIL:
         case CREATE_THREAD_FAIL:

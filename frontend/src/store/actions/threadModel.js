@@ -1,5 +1,5 @@
 import {
-    GetThreads, CreateThread, RemoveThread, GetThreadByUser
+    GetThread, CreateThread, RemoveThread, GetThreadByUser
 } from '../services/ThreadServices'
 import {
     CREATE_THREAD_SUCCESS, CREATE_THREAD_FAIL, DELETE_THREAD_SUCCESS, 
@@ -8,28 +8,9 @@ import {
 } from '../types'
 import {setAlert} from '../actions/alert'
 
-export const load_threads = () => async dispatch => {
-    try{
-        const res = await GetThreads()
-        if(res.status === 200){
-            dispatch({
-                type: LOAD_THREADS_SUCCESS,
-                payload: res.data
-            })
-        }else{
-            dispatch({
-                type: LOAD_THREADS_FAIL
-            })
-        }
-    }catch(err){
-        dispatch({
-            type: LOAD_THREADS_FAIL
-        })
-    }
-}
 export const load_thread_by_id = (id) => async dispatch => {
     try{
-        const res = await GetThreadByUser(id)
+        const res = await GetThread(id)
         if(res.status === 200){
             dispatch({
                 type: LOAD_THREAD_SUCCESS,
@@ -46,12 +27,32 @@ export const load_thread_by_id = (id) => async dispatch => {
         })
     }
 }
+export const load_threads_by_user = (id) => async dispatch => {
+    try{
+        const res = await GetThreadByUser(id)
+        if(res.status === 200){
+            dispatch({
+                type: LOAD_THREADS_SUCCESS,
+                payload: res.data
+            })
+        }else{
+            dispatch({
+                type: LOAD_THREADS_FAIL
+            })
+        }
+    }catch(err){
+        dispatch({
+            type: LOAD_THREADS_FAIL
+        })
+    }
+}
 export const upload_thread = (thread) => async dispatch => {
     try{
         const res = await CreateThread(thread)
         if(res.status === 201 || res.statusText === 'Created'){
             dispatch({
-                type: CREATE_THREAD_SUCCESS
+                type: CREATE_THREAD_SUCCESS,
+                payload: res.data
             })
         }else{
             dispatch({

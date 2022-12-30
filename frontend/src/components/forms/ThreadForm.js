@@ -2,26 +2,32 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { haltNav } from '../../utils/utils'
 import {upload_thread} from '../../store/actions/threadModel'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const ThreadForm = ({upload_thread, current_user}) => {
+const ThreadForm = ({upload_thread, current_user, new_thread}) => {
     const {id} = useParams()
+    const navigate = useNavigate()
+    const [submitted, setSubmitted] = useState(false)
     const [formData, setFormData] = useState({
         user: null,
         reciever: null
     })
     const {user, reciever} = formData;
-    
+    useEffect(() => {
+        if(submitted) navigate(`/thread/${new_thread.id}`)
+    },[submitted])
     const onSubmit = e => {
         e.preventDefault()
         upload_thread(formData)
-        // if(() => haltNav()){
-        //     navigate('/')
-        // }
+        if(()=>haltNav()){
+            setSubmitted(true)
+        }
     }
+    
     useEffect(() => {
         if(current_user){setFormData({...formData, user: current_user.id, reciever: id})}
     },[])
+    
     if(user && reciever){
         return (
             <div>
@@ -44,7 +50,8 @@ const ThreadForm = ({upload_thread, current_user}) => {
 }
 
 const mapStateToProps = state => ({
-    current_user: state.auth.current_user
+    current_user: state.auth.current_user,
+    new_thread: state.threadModel.new_thread
 })
 
 export default connect(mapStateToProps, {upload_thread})(ThreadForm);

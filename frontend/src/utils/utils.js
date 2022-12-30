@@ -3,10 +3,10 @@ export const isEmpty = (array) => {
 }
 
 export const haltNav = () => {
-    let count = 3;
+    let count = 5;
     const interval = setInterval(() => {
         count--;
-    },1000)
+    },10000)
     if(count <= 0){
         clearInterval(interval);
         return true

@@ -14,7 +14,7 @@ urlpatterns = [
     path('inbox/<int:pk>/delete/', ThreadModelDetail.as_view()),
     path('inbox/<int:pk>/messages/', MessageList.as_view()),
     path('messages/<int:pk>/', MessageDetail.as_view()),
-    
+    path('messages/', CreateMessageView.as_view()),
     # path('posts/<int:post_pk>/comment/<int:pk>/like/', AddCommentLike.as_view(), name='comment-like'),
     # path('posts/<int:post_pk>/comment/<int:pk>/dislike/', AddCommentDislike.as_view(), name='comment-dislike'),
     # path('posts/<int:post_pk>/comment/<int:pk>/reply/', CommentReplyView.as_view(), name='comment-reply'),

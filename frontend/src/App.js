@@ -11,6 +11,8 @@ import ProfilePage from './components/profile/ProfilePage';
 import InboxPage from './containers/InboxPage';
 import './styles/App.css';
 import ThreadForm from './components/forms/ThreadForm';
+import Dialog from './containers/Dialog';
+import Card405 from './components/cards/405Card';
 // import ProfileForm from './components/forms/ProfileForm';
 
 const App = ({isAuthenticated}) => {
@@ -20,7 +22,7 @@ const App = ({isAuthenticated}) => {
       <Layout>
         <Routes>
           {/* Main Base Routes */}
-          <Route path='/' element={<AuthPage />}/>
+          <Route path='/' element={isAuthenticated ? <FeedPage /> : <AuthPage />}/>
           <Route path='/logout' element={<Logout />}/>
           {/* Protected Routes */}
           <Route path='/dashboard' element={isAuthenticated ? <Dashboard /> : <AuthPage />} />
@@ -28,7 +30,9 @@ const App = ({isAuthenticated}) => {
           <Route path='/profile/:id' element={isAuthenticated ? <ProfilePage /> : <AuthPage />}/> 
           <Route path='/inbox' element={isAuthenticated ? <InboxPage /> : <AuthPage />}/> 
           <Route path='/new-thread/:id' element={isAuthenticated ? <ThreadForm /> : <AuthPage />}/> 
+          <Route path='/thread/:id' element={isAuthenticated ? <Dialog /> : <AuthPage />}/> 
           <Route path='/post/:id' element={isAuthenticated ? <PostDetail /> : <AuthPage />}/> 
+          <Route path="*" element={<Card405 />} />
         </Routes>
       </Layout>
     </div>

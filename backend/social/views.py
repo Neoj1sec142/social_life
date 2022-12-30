@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions, status, serializers
 from rest_framework.views import APIView
-from rest_framework.generics import UpdateAPIView
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from .models import Post, Comment, ThreadModel, Message
 from users.models import User
@@ -140,9 +140,18 @@ class ThreadModelDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ThreadModelSerializer
     permission_classes = (permissions.AllowAny,)
     
-    
 
-class MessageList(generics.ListCreateAPIView):
+class CreateMessageView(generics.CreateAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    permission_classes = (permissions.AllowAny, )
+    
+    class Meta:
+        model = Message
+        fields = ('__all__')
+        ordering = ('-date_created')
+        
+class MessageList(generics.ListAPIView):
     permission_classes = (permissions.AllowAny, )
     serializer_class = MessageSerializer
     def get_queryset(self):

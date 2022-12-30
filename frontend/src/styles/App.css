@@ -47,6 +47,32 @@
 .alert--success{
     background-color: rgb(5, 196, 28);
 }
+/* Message Dialog Styles */
+
+.send{
+  /* right: 0; */
+  
+  margin-left: 55%;
+  margin-right: 15%;
+  max-width: 20%;
+  background-color: rgb(12, 55, 231);
+  color: rgba(236, 245, 244, 0.918);
+  border: none;
+  border-radius: 25px;
+  float: right;
+}
+.rec{
+  /* left: 0; */
+  
+  background-color: rgba(219, 226, 225, 0.918);
+  color: rgba(24, 23, 23, 0.918);
+  border: none;
+  border-radius: 25px;
+  margin-right: 55%;
+  margin-left: 15%;
+  max-width: 20%;
+  float: left;
+}
 
 /* Custom Styles */
 
@@ -74,4 +100,8 @@ a.nol{
   position: absolute;
   margin-left: 20%;
   margin-right: 0%;
+}
+.sbr{
+  border: 1px solid rgb(118, 115, 115);
+  padding: 3px;
 }

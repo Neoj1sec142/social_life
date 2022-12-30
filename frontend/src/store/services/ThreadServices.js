@@ -1,9 +1,9 @@
 // Thread Services
 import Client from './api'
 
-export const GetThreads = async () => {
+export const GetThread = async (id) => {
     try{
-        const res = await Client.get('social/inbox/')
+        const res = await Client.get(`social/inbox/${id}/delete/`)
         console.log(res, "POST RES")
         return res
     }catch(err){console.log(err)}
