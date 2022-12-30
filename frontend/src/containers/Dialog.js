@@ -8,21 +8,27 @@ import Card403 from '../components/cards/403Card'
 
 const Dialog = ({load_thread_msgs, messages, current_user}) => {
   const {id} = useParams()
-  const [authorized, setAuthorized] = useState(false)
+  const [authorized, setAuthorized] = useState(true)
+  const [init, setInit] = useState(false)
   useEffect(() => {if(id)load_thread_msgs(id)},[])
   const {con, flexCtr, lst, lstI} = classSheet;
   useEffect(() => {
-    if(messages.length){
-      if(messages[0].sender_user === current_user.id || messages[0].reciever_user === current_user.id){
+    if(messages.length >= 1){
+      console.log(messages[0], "HEree")
+      if(messages[0].sender_user !== current_user.id || messages[0].reciever_user !== current_user.id){
+        setAuthorized(false)
+      }else{
         setAuthorized(true)
       }
+    }else{
+      setInit(true)
     }
   },[messages])
   console.log(messages, "MEssages")
-  if(messages && id){
+  if(messages && id && authorized){
     return (
       <Fragment>
-      {authorized ? (
+      {init ? (
       <div className={`${con}`}>
         <div className='msg-box m-2 mt-3 p-2'>
           {messages.length ? (messages.map((item, index) => (
@@ -39,18 +45,23 @@ const Dialog = ({load_thread_msgs, messages, current_user}) => {
               <p className='fs-8 text-muted'>Sent: {item.date_created.slice(0,10)}</p>
               <p className='text-center p-2 m-1'>Sent By Visited</p>
               </div>
-            </div>))): null}
+            </div>))): <p>No Messages Yet</p>}
         </div>
         <div className='fixed-bottom w-100 msg-form'>
           <MessageForm thread_id={id}/>
         </div>
-      </div>) : (<Card403 />)}
+      </div>) : (<div className={`${con}`}>
+        <div className='m-2 mt-3 p-2'>
+            <h1 className='m-3 text-center'>You have not started a conversation.</h1>
+            <div className='fixed-bottom w-100 msg-form'>
+              <MessageForm thread_id={id}/>
+            </div>
+        </div>
+      </div>)}
       </Fragment>
     )
-  }else{
-    return(
-      <div className='m-3 text-center'>Loading....</div>
-    )
+  }else if(messages && id && !authorized){ return(<Card403 />)
+  }else{ return( <div className='m-3 text-center'><p>Loading....</p></div> ) 
   }
 }
 

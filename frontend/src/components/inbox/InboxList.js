@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import {load_threads_by_user} from '../../store/actions/threadModel'
+import {haltNav} from '../../utils/utils'
 import {
   GridComponent, ColumnsDirective, ColumnDirective,
   Page, Search, Inject, Toolbar
@@ -14,7 +15,9 @@ const InboxList = ({
   useEffect(() => {
     if(current_user){
       load_threads_by_user(current_user.id)
-      setLoading(false)
+      if(()=>haltNav()){
+        setLoading(false)
+      }
     }
   },[])
   

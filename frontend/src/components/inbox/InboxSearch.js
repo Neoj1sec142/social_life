@@ -7,10 +7,7 @@ import {
 } from '@syncfusion/ej2-react-grids'
 import { contextMenuItems, usersGrid } from './tableData'
 const InboxSearch = ({load_all_users, users}) => {
-  const [formData, setFormData] = useState({
-    user: null,
-    reciever: null
-  })
+  
   useEffect(() => {
     load_all_users()
   },[])
@@ -40,7 +37,6 @@ const InboxSearch = ({load_all_users, users}) => {
 }
 
 const mapStateToProps = state => ({
-  current_user: state.auth.current_user,
   users: state.auth.users
 })
 

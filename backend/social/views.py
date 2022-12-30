@@ -114,6 +114,7 @@ class AddDislike(APIView):
 # RemoveNotification
 # ListThreads
 class CreateThreadModel(generics.ListCreateAPIView):
+    queryset = ThreadModel.objects.all()
     permission_classes = (permissions.AllowAny, )
     serializer_class = CrudThreadModelSerializer
     

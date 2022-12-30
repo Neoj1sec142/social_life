@@ -12,6 +12,7 @@ export const ContextProvider = ({ children }) => {
     const [activeMenu, setActiveMenu] = useState(true)
     const [isClicked, setIsClicked] = useState(initialState)
     const [dashboard, setDashboard] = useState(0)
+    const [time, setTime] = useState(5)
     // const [screenSize, setScreenSize] = useState(undefined)
     // const [currentColor, setCurrentColor] = useState('#03C9D7')
     // const [currentMode, setCurrentMode] = useState('Light')
@@ -39,6 +40,8 @@ export const ContextProvider = ({ children }) => {
             handleClick,
             dashboard,
             setDashboard,
+            time,
+            setTime,
             // screenSize, 
             // setScreenSize,
             // currentColor,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { haltNav } from '../../utils/utils'
 import {upload_thread} from '../../store/actions/threadModel'
 import { useNavigate, useParams } from 'react-router-dom'
-
+import {useStateContext} from '../../utils/ContextProvider'
 const ThreadForm = ({upload_thread, current_user, new_thread}) => {
     const {id} = useParams()
     const navigate = useNavigate()
@@ -13,15 +13,21 @@ const ThreadForm = ({upload_thread, current_user, new_thread}) => {
         reciever: null
     })
     const {user, reciever} = formData;
-    useEffect(() => {
-        if(submitted) navigate(`/thread/${new_thread.id}`)
-    },[submitted])
+    const {setTime, time} = useStateContext()
+    // useEffect(() => {
+    //     if(submitted) navigate(`/thread/${new_thread.id}`)
+    // },[submitted])
     const onSubmit = e => {
         e.preventDefault()
         upload_thread(formData)
-        if(()=>haltNav()){
-            setSubmitted(true)
+        let session = setInterval(() => {
+            setTime((prevTime) => prevTime - 1);
+        }, 1000);
+        if(time <= 0){
+            clearInterval(session)
+            navigate(`/thread/${new_thread.id}`)
         }
+        
     }
     
     useEffect(() => {
