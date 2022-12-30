@@ -1,3 +1,38 @@
+const gridUserProfile = (props) => (
+  
+    <div className="flex items-center gap-2">
+      {/* <img
+        className="rounded-full w-10 h-10"
+        src={props.EmployeeImage}
+        alt="employee"
+      /> */}
+      <a href={`profile/${props.id}/`}>
+        <p className="mt-1">{props.username}</p>
+      </a>
+  </div>
+);
+const gridUserEmail = (props) => (
+  <div className="flex items-center gap-2">
+    <p>{props.email}</p>
+  </div>
+);
+const gridUserActive = (props) => (
+  <div className="flex items-center gap-2">
+    <p className="mt-1">{props.is_active ? '🟢' : '🔴'}</p>
+  </div>
+);
+
+const gridUserDateJoined = (props) => {
+  if(props.date_joined){
+    const date = props.date_joined.slice(0,10)
+    return(
+      <div className="flex items-center gap-2">
+        <p mt-1>{date}</p>
+      </div>
+    )
+  }
+}
+
 export const contextMenuItems = [
     'AutoFit',
     'AutoFitAll',
@@ -17,30 +52,34 @@ export const contextMenuItems = [
     'NextPage',
   ];
   export const usersGrid = [
-    { headerText: 'Users',
-      width: '150',
-      template: "None",
-      textAlign: 'Center' },
-    { field: 'userame',
+    // { headerText: 'Users',
+    //   width: '150',
+    //   textAlign: 'Center' },
+    { field: 'username',
       headerText: 'Username',
-      width: '120',
+      width: '130',
+      template: gridUserProfile,
       textAlign: 'Center',
     },
     { field: 'is_active',
       headerText: 'Online Status',
-      width: '170',
+      width: '120',
       textAlign: 'Center',
+      template: gridUserActive
     },
     { field: 'email',
       headerText: 'Email',
-      width: '120',
+      width: '170',
       textAlign: 'Center',
-      template: "None" },
-    { field: 'id',
-      headerText: 'User ID',
-      width: '0',
-      textAlign: 'Center' },
+      // template: gridUserEmail 
+    },
+    { field: 'date_joined',
+      headerText: 'Date Joined',
+      width: '100',
+      template: gridUserDateJoined,
+      textAlign: 'Center'}
   ];
+
   // date_joined
   // email
   // username

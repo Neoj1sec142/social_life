@@ -52,7 +52,7 @@ const Navbar = ({isAuthenticated, userProfiles, load_user_profiles}) => {
                   <a className="nav-link" href="/dashboard">Account Dashboard</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/dashboard">Inbox</a>
+                  <a className="nav-link" href="/inbox">Inbox</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link text-muted" href="/logout" tabIndex="-1">Logout</a>

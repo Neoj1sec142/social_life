@@ -10,6 +10,7 @@ import PostDetail from './containers/details/PostDetail';
 import ProfilePage from './components/profile/ProfilePage';
 import InboxPage from './containers/InboxPage';
 import './styles/App.css';
+import ThreadForm from './components/forms/ThreadForm';
 // import ProfileForm from './components/forms/ProfileForm';
 
 const App = ({isAuthenticated}) => {
@@ -26,6 +27,7 @@ const App = ({isAuthenticated}) => {
           <Route path='/feed' element={isAuthenticated ? <FeedPage /> : <AuthPage />}/> 
           <Route path='/profile/:id' element={isAuthenticated ? <ProfilePage /> : <AuthPage />}/> 
           <Route path='/inbox' element={isAuthenticated ? <InboxPage /> : <AuthPage />}/> 
+          <Route path='/new-thread/:id' element={isAuthenticated ? <ThreadForm /> : <AuthPage />}/> 
           <Route path='/post/:id' element={isAuthenticated ? <PostDetail /> : <AuthPage />}/> 
         </Routes>
       </Layout>
