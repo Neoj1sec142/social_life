@@ -9,7 +9,7 @@ export const GetThreads = async () => {
     }catch(err){console.log(err)}
 }
 
-export const GetThreadById = async (id) => {
+export const GetThreadByUser = async (id) => {
     try{
         const res = await Client.get(`social/inbox/${id}/`)
         return res
@@ -31,15 +31,15 @@ export const CreateThread = async (thread) => {
     
 export const RemoveThread = async (id) => {
     try{
-        const res = await Client.delete(`social/inbox/${id}/`)
+        const res = await Client.delete(`social/inbox/${id}/delete/`)
         return res
     } catch (err) {console.log(err)}
 }
 
-export const UpdateThread = async (id, threadDetails) => {
-    try {
-        const res = await Client.put(`social/inbox/${id}/`, threadDetails)
-        console.log(res, "UPDATE RES")
-        return res
-      } catch (err) {console.log(err)}
-}
+// export const UpdateThread = async (id, threadDetails) => {
+//     try {
+//         const res = await Client.put(`social/inbox/${id}/`, threadDetails)
+//         console.log(res, "UPDATE RES")
+//         return res
+//       } catch (err) {console.log(err)}
+// }

@@ -30,7 +30,7 @@ export default function(state = initialState, action){
         case LOAD_USERS_SUCCESS:
             return{
                 ...state,
-                all_users: payload
+                users: payload
             }
         case LOGIN_SUCCESS:
             localStorage.setItem('access_token', payload.access)

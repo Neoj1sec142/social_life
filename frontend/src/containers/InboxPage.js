@@ -1,11 +1,12 @@
 import React from 'react'
-
+import InboxSearch from '../components/inbox/InboxSearch'
+import { connect } from 'react-redux'
 const InboxPage = () => {
   return (
     <div>
-     Inbox Here
+     <InboxSearch />
     </div>
   )
 }
 
-export default InboxPage
+export default connect(null, {})(InboxPage);

@@ -9,8 +9,11 @@ urlpatterns = [
     
     path('posts/<int:pk>/like/', AddLike.as_view()),
     path('posts/<int:pk>/dislike/', AddDislike.as_view()),
-    path('inbox/', ThreadModelList.as_view()),
-    path('inbox/<int:pk>/', ThreadModelDetail.as_view()),
+    path('inbox/', CreateThreadModel.as_view()),
+    path('inbox/<int:pk>/', ThreadModelListByUser.as_view()),
+    path('inbox/<int:pk>/delete/', ThreadModelDetail.as_view()),
+    path('inbox/<int:pk>/messages/', MessageList.as_view()),
+    path('messages/<int:pk>/', MessageDetail.as_view()),
     
     # path('posts/<int:post_pk>/comment/<int:pk>/like/', AddCommentLike.as_view(), name='comment-like'),
     # path('posts/<int:post_pk>/comment/<int:pk>/dislike/', AddCommentDislike.as_view(), name='comment-dislike'),

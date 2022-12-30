@@ -113,10 +113,22 @@ class AddDislike(APIView):
 # ThreadNotification
 # RemoveNotification
 # ListThreads
-class ThreadModelList(generics.ListCreateAPIView):
+class CreateThreadModel(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny, )
     serializer_class = ThreadModelSerializer
     
+    class Meta:
+        model = ThreadModel
+        fields = ('__all__')
+        ordering = ('-date_created')
+        
+class ThreadModelListByUser(generics.ListCreateAPIView):
+    permission_classes = (permissions.AllowAny, )
+    serializer_class = ThreadModelSerializer
+    def get_queryset(self):
+        user = self.kwargs['pk']
+        queryset = self.Meta.model.objects.filter(user=user)
+        return queryset
     class Meta:
         model = ThreadModel
         fields = ('__all__')
@@ -127,10 +139,16 @@ class ThreadModelDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ThreadModel.objects.all()
     serializer_class = ThreadModelSerializer
     permission_classes = (permissions.AllowAny,)
+    
+    
+
 class MessageList(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny, )
     serializer_class = MessageSerializer
-    
+    def get_queryset(self):
+        thread = self.kwargs['pk']
+        queryset = self.Meta.model.objects.filter(thread=thread)
+        return queryset
     class Meta:
         model = Message
         fields = ('__all__')
@@ -141,3 +159,4 @@ class MessageDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
     permission_classes = (permissions.AllowAny,)
+    

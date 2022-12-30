@@ -1,28 +1,29 @@
 import React, {useEffect, useState} from 'react'
 import { classSheet } from '../../styles/classSheet';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
     load_user_profile_by_id, follow_user, load_user_following,
     unfollow_user
 } from '../../store/actions/userProfile'
-import { isFollowing } from '../../utils/utils';
+import { haltNav } from '../../utils/utils';
 
 const ProfilePage = ({
     load_user_profile_by_id, follow_user, load_user_following, unfollow_user,
     userProfile, current_user, user_followers
 }) => {
     const {con, flexCtr, lst, lstI} = classSheet;
-    const {id} = useParams()
-    const [following, setFollowing] = useState(false)
-    const [followerId, setFollowerId] = useState({})
-    useEffect(() => {if(id) load_user_profile_by_id(id)},[])
+    const {id} = useParams();
+    
+    const [following, setFollowing] = useState(false);
+    const [followerId, setFollowerId] = useState({});
+    useEffect(() => {if(id) load_user_profile_by_id(id)},[]);
     useEffect(() => {
         if(id){
             load_user_following(id)
         }
-    }, [])
-    // Still needs work determining if user is following or not
+    }, []);
+    
     
     
     const followUser = e => {
@@ -30,43 +31,40 @@ const ProfilePage = ({
         const user = parseInt(userProfile.user.id)
         const follower = parseInt(current_user.id)
         follow_user(user, follower)
-        setInterval(() => {}, 1000)
-        return () => {
-            clearInterval()
+        if(() => haltNav()){
             window.location.reload(false)
         }
     }
     const unfollowUser = e => {
         e.preventDefault()
         unfollow_user(followerId.id)
-        setInterval(() => {}, 1000)
-        return () => {
-            clearInterval()
+        if(() => haltNav()){
             window.location.reload(false)
         }
     }
     
     useEffect(() => {
         let res = null;
-        // console.log(user_followers, '0')
         if(user_followers.length){
-            console.log('1')
             for(let i=0; i<user_followers.length; i++){
                 if(parseInt(current_user.id) === parseInt(user_followers[i].following_user)){
                     res = user_followers[i]
-                    console.log(res, '2')
                 }
             }
         }
         if(res !== null){ 
-            console.log('3')
             setFollowerId(res)
             setFollowing(true)
         }
     },[user_followers])
+    // useEffect(() => {
+    //     if(current_user && userProfile){
+    //         const current = parseInt(current_user.id)
+    //         const owner = parseInt(userProfile.user.id)
+    //         if(current === owner){ return () => navigate('/dashboard') };
+    //     }
+    // },[current_user, userProfile])
     if(userProfile.user && current_user.id && user_followers){
-        // console.log(user_followers, "USER FOLLOWERS")
-        // console.log(current_user, "Current User")
         
         const {bio, birth_date, date_created, location, name, picture} = userProfile;
         
@@ -79,6 +77,7 @@ const ProfilePage = ({
                 <p className='fs-4 ms-2'>Location: {location}</p>
                 {/* <p className='m-2 p-3'>Followers: {followers !== [] ? followers.Length : '0'}</p> */}
                 <p className='m-2 p-3'><strong>About Me:</strong><br /> {bio}</p>
+                <p className='m-2 p-3'><strong>Followers: </strong>{user_followers.length ? user_followers.length : '0'}</p>
                 {current_user.id === userProfile.user.id ? (
                     <a className='btn btn-primary' href='/dashboard'>To Dashboard</a>
                 ):(<button onClick={e=>{following ? 

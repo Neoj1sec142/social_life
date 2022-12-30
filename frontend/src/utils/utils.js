@@ -2,14 +2,13 @@ export const isEmpty = (array) => {
     return !Array.isArray(array) || !array.length
 }
 
-export const isFollowing = (current_id, followers) => {
-    let res = false;
-    for(let i=0; i<followers.length; i++){
-        const user = parseInt(current_id)
-        const follower = followers[i].following_user
-        if(user === follower){
-            res = true
-        }
+export const haltNav = () => {
+    let count = 3;
+    const interval = setInterval(() => {
+        count--;
+    },1000)
+    if(count <= 0){
+        clearInterval(interval);
+        return true
     }
-    return res;
 }

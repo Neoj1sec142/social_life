@@ -26,10 +26,10 @@ const Navbar = ({isAuthenticated, userProfiles, load_user_profiles}) => {
     e.preventDefault()        
     const searches = userProfiles.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()))
     setSearch({...search, results: searches, query: ''})
-    console.log("RESULTS", searches)
+    // console.log("RESULTS", searches)
   }
-  console.log(search, "SEARCH")
-  console.log(userProfiles, "User Profiles")
+  // console.log(search, "SEARCH")
+  // console.log(userProfiles, "User Profiles")
   let authBar;
   if(isAuthenticated){
     authBar = (
@@ -51,7 +51,9 @@ const Navbar = ({isAuthenticated, userProfiles, load_user_profiles}) => {
                 <li className="nav-item">
                   <a className="nav-link" href="/dashboard">Account Dashboard</a>
                 </li>
-                
+                <li className="nav-item">
+                  <a className="nav-link" href="/dashboard">Inbox</a>
+                </li>
                 <li className="nav-item">
                   <a className="nav-link text-muted" href="/logout" tabIndex="-1">Logout</a>
                 </li>

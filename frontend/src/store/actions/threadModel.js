@@ -1,10 +1,10 @@
 import {
-    GetThreadById, GetThreads, CreateThread, UpdateThread, RemoveThread
+    GetThreads, CreateThread, RemoveThread, GetThreadByUser
 } from '../services/ThreadServices'
 import {
     CREATE_THREAD_SUCCESS, CREATE_THREAD_FAIL, DELETE_THREAD_SUCCESS, 
-    DELETE_THREAD_FAIL, UPDATE_THREAD_SUCCESS, UPDATE_THREAD_FAIL, 
-    LOAD_THREADS_SUCCESS, LOAD_THREADS_FAIL, LOAD_THREAD_SUCCESS, LOAD_THREAD_FAIL
+    DELETE_THREAD_FAIL, LOAD_THREADS_SUCCESS, LOAD_THREADS_FAIL, 
+    LOAD_THREAD_SUCCESS, LOAD_THREAD_FAIL
 } from '../types'
 import {setAlert} from '../actions/alert'
 
@@ -29,7 +29,7 @@ export const load_threads = () => async dispatch => {
 }
 export const load_thread_by_id = (id) => async dispatch => {
     try{
-        const res = await GetThreadById(id)
+        const res = await GetThreadByUser(id)
         if(res.status === 200){
             dispatch({
                 type: LOAD_THREAD_SUCCESS,
@@ -64,25 +64,8 @@ export const upload_thread = (thread) => async dispatch => {
         })
     }
 }
-export const update_thread = (id, threadDetails) => async dispatch => {
-    try{
-        const res = await UpdateThread(id, threadDetails)
-        if(res.status === 200 || res.statusText === 'Created'){
-            dispatch({
-                type: UPDATE_THREAD_SUCCESS
-            })
-        }else{
-            dispatch({
-                type: UPDATE_THREAD_FAIL
-            })
-        }
-    }catch(err){
-        dispatch({
-            type: UPDATE_THREAD_FAIL
-        })
-    }
-}
-export const destroy_threads = (id) => async dispatch => {
+
+export const destroy_thread = (id) => async dispatch => {
     try{
         const res = await RemoveThread(id)
         if(res.status === 204 || res.statusText === 'Not Found'){
