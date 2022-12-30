@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from .models import Post, Comment, ThreadModel, Message
 from users.models import User
-from .serializers import PostSerializer, CommentSerializer, ThreadModelSerializer, MessageSerializer
+from .serializers import PostSerializer, CommentSerializer, GetThreadModelSerializer, MessageSerializer, CrudThreadModelSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin
 class PostListView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
@@ -115,7 +115,7 @@ class AddDislike(APIView):
 # ListThreads
 class CreateThreadModel(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny, )
-    serializer_class = ThreadModelSerializer
+    serializer_class = CrudThreadModelSerializer
     
     class Meta:
         model = ThreadModel
@@ -124,7 +124,7 @@ class CreateThreadModel(generics.ListCreateAPIView):
         
 class ThreadModelListByUser(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny, )
-    serializer_class = ThreadModelSerializer
+    serializer_class = GetThreadModelSerializer
     def get_queryset(self):
         user = self.kwargs['pk']
         queryset = self.Meta.model.objects.filter(user=user)
@@ -137,7 +137,7 @@ class ThreadModelListByUser(generics.ListCreateAPIView):
 
 class ThreadModelDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ThreadModel.objects.all()
-    serializer_class = ThreadModelSerializer
+    serializer_class = CrudThreadModelSerializer
     permission_classes = (permissions.AllowAny,)
     
 

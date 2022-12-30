@@ -45,7 +45,8 @@ class Notification(models.Model):
 class ThreadModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
     reciever = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
-    
+    date_created = models.DateTimeField(auto_now=True, null=True, blank=True)
+    date_modified = models.DateTimeField(auto_now=True, null=True, blank=True)
 class Message(models.Model):
     thread = models.ForeignKey(ThreadModel, on_delete=models.CASCADE, related_name='+', blank=True, null=True)
     sender_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')

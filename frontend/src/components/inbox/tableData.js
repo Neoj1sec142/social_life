@@ -1,3 +1,5 @@
+
+// Search Users Grid Data
 const gridUserProfile = (props) => (
   
     <div className="flex items-center gap-2">
@@ -9,11 +11,6 @@ const gridUserProfile = (props) => (
       <a href={`new-thread/${props.id}/`}>
         <p className="mt-1">{props.username}</p>
       </a>
-  </div>
-);
-const gridUserEmail = (props) => (
-  <div className="flex items-center gap-2">
-    <p>{props.email}</p>
   </div>
 );
 const gridUserActive = (props) => (
@@ -32,6 +29,48 @@ const gridUserDateJoined = (props) => {
     )
   }
 }
+// Search Threads Grid Data
+const gridUserThreadS = (props) => {
+  return(
+    <div className="flex items-center gap-2">
+        <a className="nol" href={`thread/${props.id}/`}>
+          <p className="mt-1 flex no-wrap">{props.user.username}</p>
+        </a>
+    </div>
+  )
+}
+const gridUserThreadR = (props) => {
+  return(
+    <div className="flex items-center gap-2">
+        <a className="nol" href={`thread/${props.id}/`}>
+          <p className="mt-1 flex no-wrap">{props.reciever.username}</p>
+        </a>
+    </div>
+  )
+}
+const gridThreadDateSt = (props) => {
+  if(props.date_created){
+    const date = props.date_created.slice(0,10)
+    return(
+      <div className="flex items-center gap-2">
+        <p mt-1>{date}</p>
+      </div>
+    )
+  }
+}
+
+const gridThreadDate = (props) => {
+  if(props.date_modified){
+    const date = props.date_modified.slice(0,10)
+    return(
+      <div className="flex items-center gap-2">
+        <p mt-1>{date}</p>
+      </div>
+    )
+  }
+}
+
+
 
 export const contextMenuItems = [
     'AutoFit',
@@ -80,21 +119,27 @@ export const contextMenuItems = [
       textAlign: 'Center'}
   ];
 
-  // date_joined
-  // email
-  // username
-  // id
-  // is_active
-  
-//   export const employeesData = [
-//     {
-//       EmployeeID: 1,
-//       Name: 'Nancy Davolio',
-//       Title: 'Sales Representative',
-//       HireDate: '01/02/2021',
-//       Country: 'USA',
-//       ReportsTo: 'Carson',
-//       EmployeeImage:
-//       avatar3,
-//     },
-//     {
+export const threadsGrid = [
+  { field: 'user',
+    headerText: 'Started By',
+    width: '170',
+    template: gridUserThreadS,
+    textAlign: 'Center',
+  },
+  { field: 'reciever',
+    headerText: 'Recieved By',
+    width: '170',
+    template: gridUserThreadR,
+    textAlign: 'Center',
+  },
+  { field: 'date_modified',
+    headerText: 'Last Msg',
+    width: '100',
+    template: gridThreadDate,
+    textAlign: 'Center'},
+  { field: 'date_created',
+    headerText: 'Date Started',
+    width: '100',
+    template: gridThreadDateSt,
+    textAlign: 'Center'}
+];
