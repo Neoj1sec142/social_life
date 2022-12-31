@@ -25,9 +25,9 @@ const ThreadForm = ({upload_thread, current_user, new_thread}) => {
         }, 1000);
         if(time <= 0){
             clearInterval(session)
+            setTime(5)
             navigate(`/thread/${new_thread.id}`)
         }
-        
     }
     
     useEffect(() => {
