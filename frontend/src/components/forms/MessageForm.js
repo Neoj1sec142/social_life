@@ -31,7 +31,10 @@ const MessageForm = ({ upload_msg, load_thread_by_id, current_user, threadModel,
             })
         }
     },[threadModel, current_user])
-
+    // const r = parseInt(threadModel.reciever)
+    // const s = threadModel.user
+    // const cur = current_user.id
+    console.log(threadModel, "Thread Model by Auth")
     if(current_user.id === threadModel.user || current_user.id === threadModel.reciever){
         return (
             <div className='row'>

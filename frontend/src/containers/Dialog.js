@@ -13,9 +13,11 @@ const Dialog = ({load_thread_msgs, messages, current_user}) => {
   useEffect(() => {if(id)load_thread_msgs(id)},[])
   const {con, flexCtr, lst, lstI} = classSheet;
   useEffect(() => {
-    if(messages.length >= 1){
-      console.log(messages[0], "HEree")
-      if(messages[0].sender_user !== current_user.id || messages[0].reciever_user !== current_user.id){
+    if(messages.length > 0){
+      const s = parseInt(messages[0].sender_user)
+      const r = parseInt(messages[0].reciever_user)
+      const cur = parseInt(current_user.id)
+      if(s !== cur && r !== cur){
         setAuthorized(false)
       }else{
         setAuthorized(true)
@@ -24,7 +26,7 @@ const Dialog = ({load_thread_msgs, messages, current_user}) => {
       setInit(true)
     }
   },[messages])
-  console.log(messages, "MEssages")
+  
   if(messages && id && authorized){
     return (
       <Fragment>
