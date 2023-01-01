@@ -2,15 +2,15 @@ from rest_framework import generics, permissions, status, serializers
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
-from .models import Post, Comment, ThreadModel, Message
+from .models import Post, Comment, ThreadModel, Message, Notification
 from users.models import User
-from .serializers import PostSerializer, CommentSerializer, GetThreadModelSerializer, MessageSerializer, CrudThreadModelSerializer
+from .serializers import PostSerializer, CommentSerializer, GetThreadModelSerializer, MessageSerializer, CrudThreadModelSerializer, NotificationSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin
 class PostListView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (permissions.AllowAny,)
-    
+        
         
     class Meta:
         model = Post
@@ -38,6 +38,16 @@ class CommentList(generics.ListCreateAPIView):
         post_id = self.kwargs['post_pk']
         queryset = self.model.objects.filter(post_id=post_id)
         return queryset
+    # def post(self, request):
+    #     comment = CommentSerializer(request.data)
+    #     if comment.is_valid():
+    #         user = comment.post.author
+    #         notification = Notification.objects.create(notification_type=3, to_user=user, from_user=comment.author, comment=comment)
+    #         serializer = NotificationSerializer(notification)
+    #         if serializer.is_valid():
+    #             serializer.save()
+        
+        
     class Meta:
         model = Comment
         fields = ('__all__')
