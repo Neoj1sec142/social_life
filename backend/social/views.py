@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from .models import Post, Comment, ThreadModel, Message, Notification
 from users.models import User
-from .serializers import PostSerializer, CommentSerializer, GetThreadModelSerializer, MessageSerializer, CrudThreadModelSerializer, NotificationSerializer
+from .serializers import PostSerializer, CommentSerializer, ThreadModelSerializer, MessageSerializer#, NotificationSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin
 class PostListView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
@@ -33,20 +33,10 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 class CommentList(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny, )
     serializer_class = CommentSerializer
-    
     def get_queryset(self):
         post_id = self.kwargs['post_pk']
         queryset = self.model.objects.filter(post_id=post_id)
         return queryset
-    # def post(self, request):
-    #     comment = CommentSerializer(request.data)
-    #     if comment.is_valid():
-    #         user = comment.post.author
-    #         notification = Notification.objects.create(notification_type=3, to_user=user, from_user=comment.author, comment=comment)
-    #         serializer = NotificationSerializer(notification)
-    #         if serializer.is_valid():
-    #             serializer.save()
-        
         
     class Meta:
         model = Comment
@@ -126,16 +116,16 @@ class AddDislike(APIView):
 class CreateThreadModel(generics.ListCreateAPIView):
     queryset = ThreadModel.objects.all()
     permission_classes = (permissions.AllowAny, )
-    serializer_class = CrudThreadModelSerializer
+    serializer_class = ThreadModelSerializer
     
     class Meta:
         model = ThreadModel
         fields = ('__all__')
         ordering = ('-date_created')
         
-class ThreadModelListByUser(generics.ListCreateAPIView):
+class ThreadModelListByUser(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny, )
-    serializer_class = GetThreadModelSerializer
+    serializer_class = ThreadModelSerializer
     def get_queryset(self):
         user = self.kwargs['pk']
         queryset = self.Meta.model.objects.filter(user=user)
@@ -148,7 +138,7 @@ class ThreadModelListByUser(generics.ListCreateAPIView):
 
 class ThreadModelDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ThreadModel.objects.all()
-    serializer_class = CrudThreadModelSerializer
+    serializer_class = ThreadModelSerializer
     permission_classes = (permissions.AllowAny,)
     
 

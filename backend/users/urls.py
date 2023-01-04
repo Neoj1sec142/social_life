@@ -15,8 +15,6 @@ urlpatterns = [
     path('users/logout/', UserLogout.as_view()),
     path('users/<str:username>/', UserDetailByUsername.as_view()),
     # Profile Routes
-    path('profiles/', UserProfileList.as_view()),
-    path('profiles/<int:pk>/', UserProfileDetail.as_view()),
     path('following/', UserFollowingList.as_view()),
     path('following/<int:pk>/', UserFollowingDetail.as_view()),
     path('following/<int:pk>/unfollow/', UnfollowView.as_view()),

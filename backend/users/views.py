@@ -4,8 +4,8 @@ from rest_framework.response import Response
 # from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import User, UserProfile, UserFollowing
-from .serializers import UserSerializer, UserDetailSerializer, UserProfileSerializer, UserFollowingSerializer
+from .models import User, UserFollowing
+from .serializers import UserSerializer, UserDetailSerializer, UserFollowingSerializer
 
 class UserList(generics.ListCreateAPIView):
   permission_classes = (permissions.AllowAny,)
@@ -49,23 +49,7 @@ class UserLogout(APIView):
         token = RefreshToken(refresh_token)
         token.blacklist()
         return Response(status=status.HTTP_205_RESET_CONTENT)
-    
-class UserProfileList(generics.ListCreateAPIView):
-    serializer_class = UserProfileSerializer
-    # model = serializer_class.Meta.model
-    queryset = UserProfile.objects.all()
-    permission_classes = (permissions.AllowAny,)
-    class Meta:
-        model = UserProfile
-        fields = ('__all__')
-        lookup_field = 'pk'
-        ordering = ('-date_created')
 
-
-class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializer
-    permission_classes = (permissions.AllowAny, )
     
 class UserFollowingList(generics.ListCreateAPIView):
     queryset = UserFollowing.objects.all()
@@ -84,14 +68,5 @@ class UnfollowView(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserFollowing.objects.all()
     serializer_class = UserFollowingSerializer
     permission_classes = (permissions.AllowAny, )           
-    # permission_classes = (permissions.AllowAny,)
-    # def get_queryset(self, pk, *args, **kwargs):
-    #     profile = UserProfile.objects.get(pk=pk)
-    #     queryset = profile.followers.all()
-    #     return queryset
-    # def get_queryset(self):
-    #     follwed_id = self.kwargs['pk']
-    #     profile = UserProfile.objects.filter(user_id=follwed_id)
-    #     queryset = profile.followers.all()
-    #     return queryset
+    
     
