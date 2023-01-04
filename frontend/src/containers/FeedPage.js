@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import PostForm from '../components/forms/PostForm';
 import PostCard from '../components/cards/PostCard'
 import {get_posts} from '../store/actions/post'
-
-const FeedPage = ({posts, get_posts}) => {
+import {load_all_users} from '../store/actions/auth'
+const FeedPage = ({posts, get_posts, load_all_users}) => {
     const {con, flexCtr, row} = classSheet;
     const [submitted, setSubmitted] = useState(false)
     useEffect(() => get_posts(), [])
+    useEffect(() => load_all_users(),[])
     return (
       <div className={`${con}`}>
           {!submitted ? (
@@ -31,4 +32,4 @@ const mapStateToProps = state => ({
   posts: state.post.posts
 })
 
-export default connect(mapStateToProps, {get_posts})(FeedPage);
+export default connect(mapStateToProps, {get_posts, load_all_users})(FeedPage);

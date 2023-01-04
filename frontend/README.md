@@ -28,12 +28,11 @@ Notifications
     comment, thread, date_created, date_modified,
     user_has_seen
 
-User profiles    
-    user, name, bio, birth_date, location,
-    picture, followers, date_created, date_modified	
+User 
+ bio, birth_date, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, location, picture, user_permissions, username
 ```
 
-Dashboard Pages:
+Dashboard Pages
 - Profile.js
 - ProfileForm.js
 
