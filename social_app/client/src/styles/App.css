@@ -1,0 +1,13 @@
+
+
+
+
+/* Custom Styles */
+.nol{
+    color: rgb(24, 24, 24);
+    text-decoration: none;
+}
+.nol:hover{
+    color: rgb(45, 43, 43);
+    text-decoration: none;
+}

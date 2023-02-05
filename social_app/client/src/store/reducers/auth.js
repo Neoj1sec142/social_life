@@ -40,7 +40,7 @@ export default function(state = initialState, action){
         case LOAD_USER_DETAIL_SUCCESS:
             return{
                 ...state,
-                USER_DETAIL: payload
+                userDetail: payload
             }
         case LOGIN_SUCCESS:
             localStorage.setItem('access_token', payload.access)

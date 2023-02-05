@@ -7,7 +7,8 @@ from users.models import User
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-    image = serializers.ImageField()
+    image = serializers.FileField()
+
     def create(self, validated_data):
         image = validated_data.get('image')
         image_file = ContentFile(image.read())
@@ -19,10 +20,15 @@ class PostSerializer(serializers.ModelSerializer):
             image.size,
             image.charset
         )
-        return validated_data
+        return super().create(validated_data)
+
     class Meta:
         model = Post
         fields = ('id', 'author', 'title', 'text', 'image', 'date_created')
+
+
+
+
 
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())

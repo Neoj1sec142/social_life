@@ -6,10 +6,11 @@ import Layout from './utils/Layout';
 import AuthPage from './containers/AuthPage'
 import Logout from './components/base/Logout';
 import Err404 from './components/base/Err404';
-import Main from './containers/Main';
+import FeedPage from './containers/FeedPage';
 import Sidebar from './components/base/Sidebar'
 import OpenButton from './components/base/Openbutton'
 import { useStateContext } from './utils/StateContext';
+import PostDetail from './components/social/blog/PostDetail';
 
 const App = ({isAuthenticated, current_user}) => {
   const {sidebarOpen} = useStateContext()
@@ -24,8 +25,9 @@ const App = ({isAuthenticated, current_user}) => {
           {/* Admin Protected Routes */}
           
           {/* Protected Routes */}
-          <Route path='/' element={isAuthenticated ? <Main /> : <AuthPage />}/>
-          <Route path='/dashboard' element={isAuthenticated ? <Main /> : <AuthPage />} />
+          <Route path='/' element={isAuthenticated ? <FeedPage /> : <AuthPage />}/>
+          <Route path='/feed' element={isAuthenticated ? <FeedPage /> : <AuthPage />} />
+          <Route path='/view-post/:id/' element={isAuthenticated ? <PostDetail /> : <AuthPage />} />
           
           <Route path="*" element={<Err404 />} /> 
         </Routes>

@@ -10,7 +10,7 @@ export const GetPosts = async () => {
 
 export const GetPostDetail = async (id) => {
     try{
-        const res = await Client.get(`s/posts/${id}/`)
+        const res = await Client.get(`s/posts/${id}/comments/`)
         return res
     }catch(err){console.log(err)}
 }
@@ -31,6 +31,13 @@ export const RemovePost = async (id) => {
 
 export const CreatePost = async (post) => {
     console.log(post, "BEfore TRY")
+    let headers = {
+        "Authorization": "JWT " + localStorage.getItem('access_token'),
+        "accept": "application/json",
+    }
+    if (post.image !== null) {
+        headers["Content-Type"] = "multipart/form-data";
+    }
     try {
         const data = {
             title: post.title,
@@ -39,10 +46,12 @@ export const CreatePost = async (post) => {
             image: post.image
         }
         console.log(data, "Before axios")
-        const res = await Client.post(`s/posts/`, data)
+        const res = await Client.post(`s/posts/`, data, {headers: headers})
         return res
     } catch (err) {console.log(err)}
 }
+
+
 
 export const GetPostComments = async (post_pk) => {
     try{
