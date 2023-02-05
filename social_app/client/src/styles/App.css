@@ -11,3 +11,8 @@
     color: rgb(45, 43, 43);
     text-decoration: none;
 }
+.post-img{
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
+}

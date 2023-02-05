@@ -1,5 +1,5 @@
 import './styles/App.css';
-import React, { useEffect } from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import { Route, Routes } from 'react-router-dom';
 import Layout from './utils/Layout';
