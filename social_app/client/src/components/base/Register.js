@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-
-import { signup, login } from '../../store/actions/auth';
+import { signup } from '../../store/actions/auth';
 import { connect } from 'react-redux';
 import { delay } from '../../utils/utils';
+import { useNavigate } from 'react-router-dom';
 
-const Register = ({signup, login, setPage}) => {
-  
+const Register = ({signup, setPage}) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     first_name: '',
@@ -25,7 +25,7 @@ const Register = ({signup, login, setPage}) => {
     e.preventDefault()
     signup(formData)
     await delay(750) 
-    
+    setPage(false)
   }
 
   return (
@@ -73,7 +73,7 @@ const Register = ({signup, login, setPage}) => {
               </div>
               <div className='row'>
                 <div className='col'>
-                  <button className='btn btn-success m-2' type='submit'>Sign Up!</button>
+                  <button className='btn btn-success m-2' disabled={password !== confirm} type='Submit'>Sign Up!</button>
                 </div>
                 <div className='col'>
                   <button className='btn btn-danger m-2' type='cancel' 
@@ -81,7 +81,7 @@ const Register = ({signup, login, setPage}) => {
                 </div>
               </div>
               <p className='text-muted'>Already have an account? 
-                <button className='btn btn-primary btn-sm mt-2 m-1' disabled={password !== confirm} onClick={()=>setPage(false)}>Click Here</button> to login.
+                <button className='btn btn-primary btn-sm mt-2 m-1' onClick={()=>setPage(false)}>Click Here</button> to login.
               </p>
             </form>
         </div>
