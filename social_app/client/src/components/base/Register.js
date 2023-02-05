@@ -25,7 +25,7 @@ const Register = ({signup, login, setPage}) => {
     e.preventDefault()
     signup(formData)
     await delay(750) 
-    setPage(false)
+    
   }
 
   return (
@@ -89,4 +89,4 @@ const Register = ({signup, login, setPage}) => {
   )
 };
 
-export default connect(null, {signup, login})(Register);
+export default connect(null, {signup})(Register);

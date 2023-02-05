@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
+import CommentForm from './CommentForm'
 import { connect } from 'react-redux'
-import { load_post_by_id, load_post_comments } from '../../../store/actions/social'
+import { 
+  load_post_by_id, load_post_comments, destroy_post
+} from '../../../store/actions/social'
 import {load_user_by_id} from '../../../store/actions/auth'
 import { delay } from '../../../utils/utils'
 
@@ -10,6 +13,7 @@ const PostDetail = ({
   current_user, post, comments, userDetail
 }) => {
   const [loading, setLoading] = useState(true)
+  const [openForm, setOpenForm] = useState(false)
   const params = useParams()
   const fetchData = async () => {
     load_post_by_id(params.id)
@@ -22,7 +26,7 @@ const PostDetail = ({
   console.log(post, "post")
   if(!loading){
     const {date_created, image, text, title} = post.post;
-    const {id, username, is_active, followers} = post.author;
+    const {id, username, is_active} = post.author;
     return (
       <div className='container-fluid'>
         <div className='d-flex justify-content-center'>
@@ -39,11 +43,14 @@ const PostDetail = ({
         {current_user.id === id ? (
         <div className='d-flex justify-content-center'>
           <button className='w-25 btn btn-danger'>Delete Post</button>
-          <button className='w-25 btn btn-primary'>Edit Post</button>
+          <button className='w-25 btn btn-primary'>View Likes</button>
         </div>):(
         <div className='d-flex justify-content-center'>
           <button className='w-25 btn btn-primary'>Like</button>
-          <button className='w-25 btn btn-success'>Comment</button>
+          {!openForm ? <button className='w-25 btn btn-success' 
+            onClick={(openForm) =>setOpenForm(!openForm)}>Comment</button> 
+            : <CommentForm post_id={params.id} />}
+          
         </div>
         )}
         <div className='d-flex justify-content-center mb-5'>
