@@ -13,7 +13,7 @@ const FeedPage = ({load_posts, current_user, posts}) => {
     setLoading(false)
   }
   useEffect(() => {if(loading) fetchPosts()},[])
-  console.log(posts, "posts")
+  
   if(!loading){
     return (
       <Fragment>

@@ -17,8 +17,7 @@ const ProfilePage = ({load_user_by_id, load_profile_list, current_user, userDeta
   }
   
   useEffect(() => {if(loading) fetchUser()},[])
-  console.log(userDetail, "IN THE DETS")
-  console.log(posts, "POSTS THE DETS")
+  
   if(!loading){
     const {email, first_name, last_name, username, is_active, followers} = userDetail;
     return (
@@ -41,10 +40,12 @@ const ProfilePage = ({load_user_by_id, load_profile_list, current_user, userDeta
           <div className="d-flex">
             {posts.map(post => (
               <div key={post.id} className="card m-3" style={{ width: '18rem' }}>
-                <div className="card-body">
-                  <h5 className="card-title">{post.title}</h5>
-                  <p className="card-text">{post.text}</p>
-                </div>
+                <a href={`/view-post/${post.id}`} className="nol"> 
+                  <div className="card-body">
+                    <h5 className="card-title">{post.title}</h5>
+                    <p className="card-text">{post.text}</p>
+                  </div>
+                </a>
               </div>
             ))}
           </div>
