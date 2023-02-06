@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { signup } from '../../store/actions/auth';
 import { connect } from 'react-redux';
 import { delay } from '../../utils/utils';
-import { useNavigate } from 'react-router-dom';
 
 const Register = ({signup, setPage}) => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     first_name: '',

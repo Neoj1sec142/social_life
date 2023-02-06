@@ -14,19 +14,19 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'is_active', 'id', 'followers']
-    def create(self, validated_data):
-        password = validated_data.pop('password', None)
-        instance = self.Meta.model(**validated_data)
-        if password is not None:
-            instance.set_password(password)
-        instance.save()
-        return instance
+    
     
 class UserDetailSerializer(serializers.ModelSerializer):
     followers = FollowSerializer(many=True, read_only=True)
     class Meta:
         model = User
-        fields = ['username', 'is_active', 'is_staff', 'email', 'id', 'first_name', 'last_name', 'followers']
+        fields = ('username', 'password', 'is_active', 'is_staff', 'email', 'id', 'first_name', 'last_name', 'followers')
+        extra_kwargs = {'password': {'write_only': True}}
+    def create(self, validated_data):
+        instance = self.Meta.model(**validated_data)
+        instance.set_password(validated_data['password'])
+        instance.save()
+        return instance
 
 
 

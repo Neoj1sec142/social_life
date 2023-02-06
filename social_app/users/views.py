@@ -1,12 +1,10 @@
 # views.py
 from .models import User, Follow
-from .serializers import UserSerializer, FollowSerializer
+from .serializers import UserSerializer, FollowSerializer, UserDetailSerializer
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
-# from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import UserSerializer, UserDetailSerializer
 
 class FollowList(generics.ListCreateAPIView):
     queryset = Follow.objects.all()
@@ -27,20 +25,25 @@ class UserDetailByUsername(generics.RetrieveAPIView):
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserDetailSerializer
 
 class UserCreate(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = ()
 
     def post(self, request, format='json'):
-        serializer = UserSerializer(data=request.data)
+        serializer = UserDetailSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
             if user:
                 json = serializer.data
                 return Response(json, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.method != 'POST':
+            return Response({'error': 'Only POST requests are allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+        return super().dispatch(request, *args, **kwargs)
 
 class UserLogout(APIView):
     permission_classes = (permissions.AllowAny,)
