@@ -8,11 +8,13 @@ import {
     LOAD_COMMENTS_SUCCESS, LOAD_COMMENTS_FAIL,
     LOAD_COMMENT_SUCCESS, LOAD_COMMENT_FAIL,
     REMOVE_COMMENT_SUCCESS, REMOVE_COMMENT_FAIL,
+    LOAD_PROFILE_LIST_SUCCESS, LOAD_PROFILE_LIST_FAIL
 } from '../types'
 
 const initialState = {
     posts: [],
     post: {},
+    postAuthor: {},
     comments: [],
     comment: {}
 }
@@ -20,16 +22,23 @@ const initialState = {
 export default function(state = initialState, action){
     const {type, payload} = action;
     switch(type){
+        case LOAD_PROFILE_LIST_SUCCESS:
         case LOAD_POSTS_SUCCESS:
             return{
                 ...state,
                 posts: payload
             }
         case UPLOAD_POST_SUCCESS:
-        case LOAD_POST_SUCCESS:
             return{
                 ...state,
                 post: payload
+            }
+        case LOAD_POST_SUCCESS:
+            return{
+                ...state,
+                post: payload.post,
+                comments: payload.comments,
+                postAuthor: payload.author
             }
         case LOAD_COMMENTS_SUCCESS:
             return{
@@ -42,6 +51,7 @@ export default function(state = initialState, action){
                 ...state,
                 comment: payload
             }
+        case LOAD_PROFILE_LIST_FAIL:
         case UPLOAD_POST_FAIL:
         case LOAD_POST_FAIL:
         case REMOVE_POST_SUCCESS:

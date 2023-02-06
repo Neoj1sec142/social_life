@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { upload_comment } from '../../../store/actions/social';
 import { delay } from '../../../utils/utils';
 
-const CommentForm = ({upload_comment, current_user, post_id}) => {
+const CommentForm = ({upload_comment, current_user, post_id, fetchData}) => {
   const [formData, setFormData] = useState({
     post: null,
     author: null,
@@ -22,20 +22,22 @@ const CommentForm = ({upload_comment, current_user, post_id}) => {
       author: null,
       text: ''
     })
+    fetchData()
   }
-
+  
   if(current_user && post_id){
     return (
       <div className='container-fluid'>
-        <form onSubmit={e=>onSubmit(e)}>
+        <form onSubmit={e=>onSubmit(e)} className='d-flex justify-content-center'>
           <input hidden name='author' value={author}/>
           <input hidden name='post' value={post} />
+          <div className='row w-75'>
           <input className='form-control w-75'
             name='text' value={text} 
             type='text' required
             onChange={e=>onChange(e)}
             placeholder='Enter comment here...'/>
-          <button type="Submit" className='btn btn-success w-25'>Post</button>
+          <button type="Submit" className='btn btn-success w-25'>Post</button></div>
         </form>
       </div>
     )

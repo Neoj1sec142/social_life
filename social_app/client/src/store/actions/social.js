@@ -7,11 +7,12 @@ import {
     LOAD_COMMENTS_SUCCESS, LOAD_COMMENTS_FAIL,
     LOAD_COMMENT_SUCCESS, LOAD_COMMENT_FAIL,
     REMOVE_COMMENT_SUCCESS, REMOVE_COMMENT_FAIL,
+    LOAD_PROFILE_LIST_SUCCESS, LOAD_PROFILE_LIST_FAIL
 } from '../types'
 import { setAlert } from './alert'
 import {
  GetPosts, GetPostDetail, GetPostComments, GetCommentById,
- CreatePost, CreateComment, RemovePost, RemoveComment
+ CreatePost, CreateComment, RemovePost, RemoveComment, GetProfileList
 } from '../services/PostServices'
 // Post Actions
 export const load_posts = () => async dispatch => {
@@ -36,6 +37,32 @@ export const load_posts = () => async dispatch => {
             type: LOAD_POSTS_FAIL
         })
         dispatch(setAlert('Error fetching posts', 'error'))
+    }
+}
+
+export const load_profile_list = (username) => async dispatch => {
+    console.log(username, "before try in action")
+    try{
+        const res = await GetProfileList(username)
+        if(res.status === 200){
+            console.log(res, "res after call")
+            dispatch({
+                type: LOAD_PROFILE_LIST_SUCCESS,
+                payload: res.data
+            })
+        }else{
+            console.log(res, 'error 1')
+            dispatch({
+                type: LOAD_PROFILE_LIST_FAIL
+            })
+            dispatch(setAlert('Error fetching profile posts', 'error'))
+        }
+    }catch(err){
+        console.log(err, 'error 2')
+        dispatch({
+            type: LOAD_PROFILE_LIST_FAIL
+        })
+        dispatch(setAlert('Error fetching profile posts', 'error'))
     }
 }
 

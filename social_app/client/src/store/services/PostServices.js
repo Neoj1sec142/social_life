@@ -15,6 +15,15 @@ export const GetPostDetail = async (id) => {
     }catch(err){console.log(err)}
 }
 
+export const GetProfileList = async (username) => {
+    console.log(username, 'username before try in service')
+    try{
+        const res = await Client.get(`s/user/posts/${username}/`)
+        console.log(res, "res after call in service")
+        return res
+    }catch(err){console.log(err)}
+}
+
 export const UpdatePost = async (id, port) => {
     try {
         const res = await Client.put(`s/posts/${id}/`, port)
@@ -63,9 +72,9 @@ export const CreateComment = async (comment) => {
     console.log(comment, "BEfore TRY")
     try {
         const data = {
-            author: comment.user,
+            author: comment.author,
             post: comment.post,
-            text: comment.content
+            text: comment.text
         }
         console.log(data, "Before axios")
         const res = await Client.post(`s/comments/`, data)

@@ -11,6 +11,7 @@ import Sidebar from './components/base/Sidebar'
 import OpenButton from './components/base/Openbutton'
 import { useStateContext } from './utils/StateContext';
 import PostDetail from './components/social/blog/PostDetail';
+import ProfilePage from './containers/ProfilePage';
 
 const App = ({isAuthenticated, current_user}) => {
   const {sidebarOpen} = useStateContext()
@@ -28,7 +29,7 @@ const App = ({isAuthenticated, current_user}) => {
           <Route path='/' element={isAuthenticated ? <FeedPage /> : <AuthPage />}/>
           <Route path='/feed' element={isAuthenticated ? <FeedPage /> : <AuthPage />} />
           <Route path='/view-post/:id/' element={isAuthenticated ? <PostDetail /> : <AuthPage />} />
-          
+          <Route path='/profile/:username/' element={isAuthenticated ? <ProfilePage /> : <AuthPage />} />
           <Route path="*" element={<Err404 />} /> 
         </Routes>
       </Layout>

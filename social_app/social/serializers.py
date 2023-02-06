@@ -32,7 +32,8 @@ class PostSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    username = serializers.CharField(source='author.username', read_only=True)
+    
     class Meta:
         model = Comment
-        fields = ('id', 'author', 'post', 'text', 'created_at')
-
+        fields = ('id', 'author', 'username', 'post', 'text', 'date_created')

@@ -1,6 +1,8 @@
 # views.py
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
 from .models import Post, Comment
 from users.models import User
 from users.serializers import UserSerializer
@@ -35,14 +37,17 @@ class PostDetailWithComments(generics.RetrieveAPIView):
             'author': author_serializer.data,
         })
     
-# class PostCommentListView(generics.ListAPIView):
-#     queryset = Comment.objects.all()
-#     serializer_class = CommentSerializer
-#     permission_classes = (permissions.AllowAny,)
+class UserPostList(APIView):
+    def get(self, request, username, format=None):
+        user = get_object_or_404(User, username=username)
+        posts = Post.objects.filter(author=user)
+        serializer = PostSerializer(posts, many=True)
 
-#     def get_queryset(self):
-#         post = self.kwargs['post_pk']
-#         return Comment.objects.filter(post=post)
+        for post in serializer.data:
+            comments = Comment.objects.filter(post=post['id'])
+            post['comments_count'] = comments.count()
+
+        return Response(serializer.data)
 
 class CommentCreateView(generics.CreateAPIView):
     queryset = Comment.objects.all()

@@ -5,9 +5,11 @@ from rest_framework import serializers
 from .models import User
 
 class FollowSerializer(serializers.ModelSerializer):
+    follower_name = serializers.CharField(source='follower.username', read_only=True)
+    followee_name = serializers.CharField(source='followee.username', read_only=True)
     class Meta:
         model = Follow
-        fields = ('id', 'follower', 'followee')
+        fields = ('id', 'follower', 'followee', 'follower_name', 'followee_name')
 
 class UserSerializer(serializers.ModelSerializer):
     followers = FollowSerializer(many=True, read_only=True)
