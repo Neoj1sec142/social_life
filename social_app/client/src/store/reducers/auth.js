@@ -7,6 +7,8 @@ import {
     LOAD_USERS_SUCCESS, LOAD_USERS_FAIL,
     UPDATE_USER_SUCCESS, UPDATE_USER_FAIL,
     REMOVE_USER_SUCCESS, REMOVE_USER_FAIL,
+    FOLLOW_USER_SUCCESS, FOLLOW_USER_FAIL,
+    UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAIL
 } from '../types'
 
 const initialState = {
@@ -66,6 +68,10 @@ export default function(state = initialState, action){
                 token: null,
                 loading: false
             }
+        case FOLLOW_USER_SUCCESS:
+        case FOLLOW_USER_FAIL:
+        case UNFOLLOW_USER_SUCCESS:
+        case UNFOLLOW_USER_FAIL:
         case UPDATE_USER_FAIL:
         case REMOVE_USER_SUCCESS:
         case REMOVE_USER_FAIL:

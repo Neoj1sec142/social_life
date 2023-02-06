@@ -37,3 +37,19 @@ export const RemoveUser = async (id) => {
     } catch (err) {throw err}
 }
 
+export const FollowUser = async (fol) => {
+    try{
+        const data = {
+            follower: fol.follower,
+            followee: fol.followee
+        }
+        const res = await Client.post('follows/', data)
+        return res
+    }catch(err){ console.log(err, "err") }
+}
+export const UnfollowUser = async (id) => {
+    try{
+        const res = await Client.delete(`follows/${id}/`)
+        return res
+    } catch (err) {console.log(err, "Err")}
+}

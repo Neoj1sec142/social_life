@@ -9,8 +9,13 @@ import {
     LOAD_USERS_SUCCESS, LOAD_USERS_FAIL,
     UPDATE_USER_SUCCESS, UPDATE_USER_FAIL,
     REMOVE_USER_SUCCESS, REMOVE_USER_FAIL,
+    FOLLOW_USER_SUCCESS, FOLLOW_USER_FAIL,
+    UNFOLLOW_USER_SUCCESS, UNFOLLOW_USER_FAIL
 } from '../types'
-import { GetUsers, UpdateUser, RemoveUser, GetUserDetail } from '../services/UserServices'
+import { 
+    GetUsers, UpdateUser, RemoveUser, 
+    GetUserDetail, FollowUser, UnfollowUser
+} from '../services/UserServices'
 
 export const login = ({username, password}) => async dispatch => {
     try{
@@ -228,6 +233,47 @@ export const destroy_user = (id) => async dispatch => {
         console.log(err, "Error 2")
         dispatch({
             type: REMOVE_USER_FAIL
+        })
+    }
+}
+
+export const follow_user = (fol) => async dispatch => {
+    try{
+        const res = await FollowUser(fol)
+        if(res.status === 201 || res.statusText === 'Created'){
+            dispatch({
+                type: FOLLOW_USER_SUCCESS
+            })
+        }else{
+            console.log(res, "ERR 1")
+            dispatch({
+                type: FOLLOW_USER_FAIL
+            })
+        }
+    }catch(err){
+        console.log(err, "ERR 2")
+        dispatch({
+            type: FOLLOW_USER_FAIL
+        })
+    }
+}
+export const unfollow_user = (id) => async dispatch => {
+    try{
+        const res = await UnfollowUser(id)
+        if(res.status === 200 || res.statusText === 'No Content'){
+            dispatch({
+                type: UNFOLLOW_USER_SUCCESS
+            })
+        }else{
+            console.log(res, "Error 1")
+            dispatch({
+                type: UNFOLLOW_USER_FAIL
+            })
+        }
+    }catch(err){
+        console.log(err, "Error 2")
+        dispatch({
+            type: UNFOLLOW_USER_FAIL
         })
     }
 }
