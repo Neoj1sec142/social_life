@@ -96,8 +96,7 @@ export const upload_post = (post) => async dispatch => {
         const res = await CreatePost(post)
         if(res.status === 201 || res.statusText === 'Created'){
             dispatch({
-                type: UPLOAD_POST_SUCCESS,
-                payload: res.data
+                type: UPLOAD_POST_SUCCESS
             })
             
         }else{

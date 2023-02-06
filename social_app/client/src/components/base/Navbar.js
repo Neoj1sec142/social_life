@@ -3,11 +3,12 @@ import Alert from '../../utils/Alert'
 import { connect } from 'react-redux';
 
 
-const Navbar = ({isAuthenticated}) => {
+const Navbar = ({isAuthenticated, current_user}) => {
   
   
   let authBar;
   if(isAuthenticated){
+    let {username} = current_user;
     authBar = (
       <Fragment>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,7 +25,26 @@ const Navbar = ({isAuthenticated}) => {
                     <i className='fa fa-home'></i>&nbsp;Home
                   </a>
                 </li>
-                
+                <li className="nav-item">
+                  <a className="nav-link" href="/earth">
+                    <i className='fa fa-tree'></i>&nbsp;~ Our Home ~
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href={`/profile/${username}`}>
+                    <i className='fa-solid fa-user'></i>&nbsp;Your Profile
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/about">
+                    <i className='fa-solid fa-circle-info'></i>&nbsp;About Us
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="/about">
+                    <i className='fa fa-phone'></i>&nbsp;Contact Us
+                  </a>
+                </li>
                 <li className="nav-item">
                   <a className="nav-link text-muted" href="/logout" tabIndex="-1">
                     <i className='fa fa-sign-out'></i>&nbsp;Logout
@@ -61,7 +81,21 @@ const Navbar = ({isAuthenticated}) => {
                   <i className='fa fa-sign-in'></i>&nbsp;Login
                 </a>
               </li>
-              
+              <li className="nav-item">
+                <a className="nav-link" href="/earth">
+                  <i className='fa fa-tree'></i>&nbsp;~ Our Home ~
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/about">
+                  <i className='fa-solid fa-circle-info'></i>&nbsp;About Us
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/about">
+                  <i className='fa fa-phone'></i>&nbsp;Contact Us
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -73,7 +107,8 @@ const Navbar = ({isAuthenticated}) => {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  current_user: state.auth.current_user
 })
 
 export default connect(mapStateToProps, {})(Navbar)

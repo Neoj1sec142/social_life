@@ -12,6 +12,7 @@ import OpenButton from './components/base/Openbutton'
 import { useStateContext } from './utils/StateContext';
 import PostDetail from './components/social/blog/PostDetail';
 import ProfilePage from './containers/ProfilePage';
+import ProfileUpdate from './components/base/ProfileUpdate';
 
 const App = ({isAuthenticated, current_user}) => {
   const {sidebarOpen} = useStateContext()
@@ -28,8 +29,9 @@ const App = ({isAuthenticated, current_user}) => {
           {/* Protected Routes */}
           <Route path='/' element={isAuthenticated ? <FeedPage /> : <AuthPage />}/>
           <Route path='/feed' element={isAuthenticated ? <FeedPage /> : <AuthPage />} />
-          <Route path='/view-post/:id/' element={isAuthenticated ? <PostDetail /> : <AuthPage />} />
-          <Route path='/profile/:username/' element={isAuthenticated ? <ProfilePage /> : <AuthPage />} />
+          <Route path='/view-post/:id' element={isAuthenticated ? <PostDetail /> : <AuthPage />} />
+          <Route path='/profile/:username' element={isAuthenticated ? <ProfilePage /> : <AuthPage />} />
+          <Route path='/profile-update' element={isAuthenticated ? <ProfileUpdate /> : <AuthPage />} />
           <Route path="*" element={<Err404 />} /> 
         </Routes>
       </Layout>

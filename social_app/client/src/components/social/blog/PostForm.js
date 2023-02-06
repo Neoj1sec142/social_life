@@ -17,7 +17,11 @@ const PostForm = ({upload_post, current_user}) => {
   const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
   const onSubmit = async e => {
     e.preventDefault()
-    formData.image = img;
+    if(img !== null){ 
+      formData.image = img; 
+    }else{
+      formData.image = ''; 
+    };
     formData.author = current_user.id;  
     upload_post(formData)
     await delay(750)

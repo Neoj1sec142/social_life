@@ -43,9 +43,7 @@ export const CreatePost = async (post) => {
     let headers = {
         "Authorization": "JWT " + localStorage.getItem('access_token'),
         "accept": "application/json",
-    }
-    if (post.image !== null) {
-        headers["Content-Type"] = "multipart/form-data";
+        "Content-Type": "multipart/form-data"
     }
     try {
         const data = {

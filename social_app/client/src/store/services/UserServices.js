@@ -22,8 +22,10 @@ export const GetAllUserDetail = async (id) => {
 }
 
 export const UpdateUser = async (id, userDetails) => {
+    console.log(userDetails, "DETS b4 TRY")
     try {
         const res = await Client.put(`users/${id}/`, userDetails)
+        console.log(res, "AFTER CALL")
         return res
       } catch (err) {throw err}
 }

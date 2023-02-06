@@ -28,11 +28,6 @@ export default function(state = initialState, action){
                 ...state,
                 posts: payload
             }
-        case UPLOAD_POST_SUCCESS:
-            return{
-                ...state,
-                post: payload
-            }
         case LOAD_POST_SUCCESS:
             return{
                 ...state,
@@ -51,6 +46,7 @@ export default function(state = initialState, action){
                 ...state,
                 comment: payload
             }
+        case UPLOAD_POST_SUCCESS:
         case LOAD_PROFILE_LIST_FAIL:
         case UPLOAD_POST_FAIL:
         case LOAD_POST_FAIL:
