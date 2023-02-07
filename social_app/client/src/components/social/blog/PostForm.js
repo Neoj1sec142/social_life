@@ -35,7 +35,7 @@ const PostForm = ({upload_post, current_user}) => {
   }
 
   return (
-    <div className='fixed-bottom container'>
+    <div className='fixed-bottom container mb-5'>
       <form encType='multipart/form-data' onSubmit={e=>onSubmit(e)}>
         <input hidden name="author" value={author} />
         <div className='form-group'>

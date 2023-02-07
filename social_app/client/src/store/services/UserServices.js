@@ -53,3 +53,9 @@ export const UnfollowUser = async (id) => {
         return res
     } catch (err) {console.log(err, "Err")}
 }
+export const GetFollowByUsername = async (followerUsername, followeeUsername) => {
+    try{
+        const res = await Client.get(`/follow/${followerUsername}/`)
+        return res
+    }catch(err){ console.log(err, "err")}
+};

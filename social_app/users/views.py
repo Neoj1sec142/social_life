@@ -14,6 +14,18 @@ class FollowDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
 
+class FollowDetailView(generics.RetrieveAPIView):
+    serializer_class = FollowSerializer
+    # lookup_field = 'followee'
+    # lookup_url_kwarg = 'follower'
+
+    def get_queryset(self):
+        followee = self.request.user
+        follower = self.kwargs['follower']
+        # followee_user = User.objects.get(username=followee)
+        follower_user = User.objects.get(username=follower)
+        return Follow.objects.filter(followee=followee, follower=follower_user)
+
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
