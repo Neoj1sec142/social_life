@@ -1,13 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.f6390f16.css",
-    "main.js": "/static/js/main.73e25201.js",
+    "main.css": "/static/css/main.dbbbd1e3.css",
+    "main.js": "/static/js/main.a6aae5cb.js",
+    "static/media/pr_timeseries_annual_era_1970-2020_USA.csv": "/static/media/pr_timeseries_annual_era_1970-2020_USA.f108c0e548e5c035a3a8.csv",
+    "static/media/tasmax_timeseries_annual_era_1970-2020_USA.csv": "/static/media/tasmax_timeseries_annual_era_1970-2020_USA.62b0c0276b2e98e1523e.csv",
+    "static/media/tasmin_timeseries_annual_era_1970-2020_USA.csv": "/static/media/tasmin_timeseries_annual_era_1970-2020_USA.ec0667ca60bbe123e659.csv",
+    "static/media/tas_climatology_annual-seasonal_cru_1991-2020_USA.csv": "/static/media/tas_climatology_annual-seasonal_cru_1991-2020_USA.fce02594afeaa3aab397.csv",
     "index.html": "/index.html",
-    "main.f6390f16.css.map": "/static/css/main.f6390f16.css.map",
-    "main.73e25201.js.map": "/static/js/main.73e25201.js.map"
+    "main.dbbbd1e3.css.map": "/static/css/main.dbbbd1e3.css.map",
+    "main.a6aae5cb.js.map": "/static/js/main.a6aae5cb.js.map"
   },
   "entrypoints": [
-    "static/css/main.f6390f16.css",
-    "static/js/main.73e25201.js"
+    "static/css/main.dbbbd1e3.css",
+    "static/js/main.a6aae5cb.js"
   ]
 }
