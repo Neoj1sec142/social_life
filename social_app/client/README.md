@@ -8,3 +8,40 @@ State Changable line chart min + max over time
 precipitation pie chart of the usa
 bar chart of emmission countrys
 bar chart of emmssions us states horizontal bars vertical scroll
+
+
+
+## Data: 
+### Agriculture & Rural:
+- [Forest Area SQ. KM]()     
+- [Rural Population]()       
+### Aid Effectiveness
+- [Poverty headcount Ratio]()       
+### Climate Change:
+- [Access to Electricity]()       
+- [Co2 Emssions](./src//components/earth/data/co2Emissions.json)       
+- [Energy Use KG of Oil]()       
+- [Methane Emmssions]()       
+- [Electical Power Consumption]()       
+- [Nitrous Oxcide Emissions]()       
+- [Population Growth % Annual]()       
+- [Prevalance of underweight, weight for age]()       
+- [Renewable Energy Consumption]()       
+- [Total greenhouse gas Emmissions]()       
+Economy and Growth
+- [Central Gov't debt Total]()       
+- [GDP US$]()       
+- [GDP growth annual %]()       
+- [Inflation, consumer prices]()       
+- [Total Reserves includes gold current us$]()       
+Education
+- [Males out of school]()       
+- [Females out of school]()       
+- [Gov't Exspense on Edu tot % of GDp ]()       
+- [Gov't Expense on Edu tot % of gov't expenses]()       
+- [Labor Force Total]()       
+- [Pupil Teacher Ratio]()       
+- [Unemployment Total]()       
+Energ
+- []()       
+
