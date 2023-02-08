@@ -5,6 +5,9 @@ import App from './App';
 import { Provider } from 'react-redux';
 import {ContextProvider} from './utils/StateContext'
 import store from './store/store'
+import { registerLicense } from '@syncfusion/ej2-base';
+
+registerLicense(process.env.REACT_APP_KEY);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

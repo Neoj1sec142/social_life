@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@syncfusion/ej2": "^20.4.49",
+    "@syncfusion/ej2-base": "^20.4.48",
     "@syncfusion/ej2-react-charts": "^20.4.49",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
