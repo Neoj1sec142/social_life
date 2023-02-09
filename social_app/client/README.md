@@ -14,9 +14,6 @@ bar chart of emmssions us states horizontal bars vertical scroll
 ## Data: 
 ### Agriculture & Rural:
 - [Forest Area SQ. KM]()     
-- [Rural Population]()       
-### Aid Effectiveness
-- [Poverty headcount Ratio]()       
 ### Climate Change:
 - [Access to Electricity]()       
 - [Co2 Emssions](./src//components/earth/data/co2Emissions.json)       
@@ -25,23 +22,34 @@ bar chart of emmssions us states horizontal bars vertical scroll
 - [Electical Power Consumption]()       
 - [Nitrous Oxcide Emissions]()       
 - [Population Growth % Annual]()       
-- [Prevalance of underweight, weight for age]()       
 - [Renewable Energy Consumption]()       
 - [Total greenhouse gas Emmissions]()       
+     
+Energy
+- [Electric Power Consumption by Captial]()       
+- [Annual freshwater withdrawl by %]()      
+- [Bird Species Threatened]()      
+- [Fish Species Threatened]()      
+- [Mammal Species Threatened]()      
+- [Air Polution Mean Annual Exposure]()      
+- [Plant Species Threatened]()      
+Finaces
+- [Total Reserves]()      
+Heatlh
+- [Cause of Death (Injury)]()      
+- [Cause of Death (Communicable Diseases)]()      
+- [Diabetes Prevalence pop between 20-79]()      
+Poverty
+- [Income Share held by highest 10%]()      
+- [Income Share held by highest 20%]()      
+- [Income Share held by 4th 20%]()      
+- [Income Share held by 3rd 20%]()      
+- [Income Share held by 2nd 20%]()      
+- [Income Share held by lowest 20%]()      
+- [Poverty at National Count]()      
+- [Population Living in SLums]()      
 Economy and Growth
 - [Central Gov't debt Total]()       
 - [GDP US$]()       
 - [GDP growth annual %]()       
-- [Inflation, consumer prices]()       
-- [Total Reserves includes gold current us$]()       
-Education
-- [Males out of school]()       
-- [Females out of school]()       
-- [Gov't Exspense on Edu tot % of GDp ]()       
-- [Gov't Expense on Edu tot % of gov't expenses]()       
-- [Labor Force Total]()       
-- [Pupil Teacher Ratio]()       
-- [Unemployment Total]()       
-Energ
-- []()       
-
+- [Inflation, consumer prices]()  
