@@ -17,7 +17,6 @@ const EarthPage = () => {
       <div className='container-fluid'>
         <div className='d-flex justify-content-center mt-5'>
           <div className='row w-75 shadow-sm'>
-            <p>Some Text</p>
             <DataSelectionGrid />
           </div>
         </div>

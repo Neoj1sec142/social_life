@@ -5,6 +5,7 @@ const Default = ({onGridChange}) => {
     <div>
         <p className='card-header'>DataType</p>
         <select name="selection" onChange={e=>onGridChange(e)}>
+            <option>Select a Data Type</option>
             <option>Forest</option>
             <option>Emissions</option>
             <option>Water</option>
