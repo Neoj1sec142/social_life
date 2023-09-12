@@ -12,17 +12,17 @@ class FollowSerializer(serializers.ModelSerializer):
         fields = ('id', 'follower', 'followee', 'follower_name', 'followee_name')
 
 class UserSerializer(serializers.ModelSerializer):
-    followers = serializers.StringRelatedField(many=True, read_only=True)
+    # followers = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model = User
-        fields = ['username', 'is_active', 'id', 'followers']
+        fields = ('username', 'password', 'is_active', 'is_staff', 'email', 'id', 'first_name', 'last_name')
     
     
 class UserDetailSerializer(serializers.ModelSerializer):
-    followers = serializers.StringRelatedField(many=True, read_only=True)
+    # followers = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model = User
-        fields = ('username', 'password', 'is_active', 'is_staff', 'email', 'id', 'first_name', 'last_name', 'followers')
+        fields = "__all__"
         extra_kwargs = {'password': {'write_only': True}}
     def create(self, validated_data):
         instance = self.Meta.model(**validated_data)
